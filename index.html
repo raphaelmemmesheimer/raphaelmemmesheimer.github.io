@@ -36,15 +36,12 @@ body {
       margin-bottom: 10px;
     }
 
-    .item-list li .preview {
+    .item-list li .preview img {
       margin-right: 15px;
-      img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 10px;
-        <!-- shadow -->
-      }
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
     }
     .item-list li .text {
       flex-grow: 1;
@@ -60,19 +57,18 @@ body {
 
     .about {
       font-size: 1.2em;
+    }
 
-      img {
-        width: 300px;
-        border-radius: 10px;
-        float: right;
-        margin-left: 20px;
-      }
+    .about img {
+      width: 300px;
+      border-radius: 10px;
+      float: right;
+      margin-left: 20px;
     }
 
     .cryptedmail:after {
-      content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
+      content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
     }
-
     </style>
   </head>
   <!-- css -->
