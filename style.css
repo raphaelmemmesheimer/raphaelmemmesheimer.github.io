@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        width: 90%;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 70%;
+    }
+}
+
+.item-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item-list li .preview img {
+    margin-right: 15px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.item-list li .text {
+    flex-grow: 1;
+}
+
+.about {
+    font-size: 1.2em;
+}
+
+.about img {
+    width: 300px;
+    border-radius: 10px;
+    float: right;
+    margin-left: 20px;
+}
+
+.cryptedmail:after {
+    content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
+}
+
+details {
+    padding: 2px;
+    margin-bottom: 2px;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+}
