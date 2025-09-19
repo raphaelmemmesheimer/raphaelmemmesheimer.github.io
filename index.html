@@ -1,94 +1,266 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Raphael Memmesheimer</title>
-    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"-->
     <style>
-body {
-  font-family: Arial, sans-serif; /* Add a default font family */
-  font-size: 16px; /* Set a base font size */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      :root {
+        --bg: #0b0d10;
+        --surface: #12161b;
+        --card: #171c22;
+        --text: #e8eef6;
+        --muted: #a7b3c3;
+        --accent: #4da3ff;
+        --accent-2: #8aebff;
+        --border: #233041;
+        --shadow: 0 6px 18px rgba(0,0,0,0.35);
+        --radius: 14px;
+        --radius-sm: 10px;
+        --space: 18px;
+        --space-lg: 28px;
+        --maxw: 1100px;
+      }
 
-@media (max-width: 1200px) {
-  .container {
-    width: 90%;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 70%;
-  }
-}
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f7f9fc;
+          --surface: #ffffff;
+          --card: #ffffff;
+          --text: #0d1b2a;
+          --muted: #4b5563;
+          --accent: #2563eb;
+          --accent-2: #0ea5e9;
+          --border: #e5e7eb;
+          --shadow: 0 10px 20px rgba(2,6,23,0.08);
+        }
+      }
 
-.item-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  font-size: 1em; /* Set a consistent font size for list items */
-}
+      html[data-theme="light"] {
+        --bg: #f7f9fc;
+        --surface: #ffffff;
+        --card: #ffffff;
+        --text: #0d1b2a;
+        --muted: #4b5563;
+        --accent: #2563eb;
+        --accent-2: #0ea5e9;
+        --border: #e5e7eb;
+        --shadow: 0 10px 20px rgba(2,6,23,0.08);
+      }
 
-.item-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 1em;
-}
+      /* Force dark when selected, independent of media preference */
+      html[data-theme="dark"] {
+        --bg: #0b0d10;
+        --surface: #12161b;
+        --card: #171c22;
+        --text: #e8eef6;
+        --muted: #a7b3c3;
+        --accent: #4da3ff;
+        --accent-2: #8aebff;
+        --border: #233041;
+        --shadow: 0 6px 18px rgba(0,0,0,0.35);
+      }
 
-.item-list li .preview img {
-  margin-right: 15px;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+      html, body { height: 100%; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: radial-gradient(1200px 800px at 20% -10%, rgba(77,163,255,0.12), transparent 60%),
+                    radial-gradient(800px 600px at 85% -10%, rgba(14,165,233,0.12), transparent 60%),
+                    var(--bg);
+        background-attachment: fixed;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        font-size: clamp(15px, 1.05vw, 18px);
+        line-height: 1.6;
+      }
 
-.item-list li .text {
-  flex-grow: 1;
-  font-size: 1.em;
-}
+      .container {
+        width: 100%;
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 var(--space);
+      }
 
-.item-list li .text h3,
-.item-list li .text p {
-  margin: 0;
-}
+      /* Header / Nav */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(1.2) blur(10px);
+        background: color-mix(in oklab, var(--bg) 80%, transparent);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+      .brand { font-weight: 700; letter-spacing: 0.2px; }
+      .brand a { color: var(--text); text-decoration: none; }
+      .nav a { color: var(--muted); text-decoration: none; margin-left: 16px; }
+      .nav a:hover { color: var(--accent); }
+      .theme-toggle {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        padding: 8px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
 
-.about {
-  font-size: 1.2em;
-}
+      /* Intro */
+      h1 {
+        font-size: clamp(28px, 3.2vw, 44px);
+        line-height: 1.2;
+        margin: 28px 0 12px;
+      }
+      h2 {
+        font-size: clamp(20px, 2.2vw, 28px);
+        margin: 28px 0 12px;
+      }
+      h3 { margin: 18px 0 8px; color: var(--muted); }
 
-.about img {
-  width: 300px;
-  border-radius: 10px;
-  float: right;
-  margin-left: 20px;
-}
+      .lead { color: var(--muted); }
 
-.cryptedmail:after {
-  content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
-}
+      .about { font-size: 1.05em; }
+      .about img {
+        width: 220px;
+        max-width: 35vw;
+        border-radius: 14px;
+        float: right;
+        margin-left: 24px;
+        box-shadow: var(--shadow);
+      }
 
-/* Add styling for details and summary elements */
-details {
-  /*border: 1px solid #ddd;
-  /*border-radius: 4px;*/
-  padding: 2px;
-  margin-bottom: 2px;
-}
+      /* Generic links */
+      a { color: var(--accent); }
+      a:hover { color: var(--accent-2); }
 
-summary {
-  font-weight: bold;
-  cursor: pointer;
-}
+      /* Lists as modern cards */
+      .item-list { list-style: none; margin: 0; padding: 0; }
+      .item-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin: 14px 0;
+        padding: 16px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        transition: transform 140ms ease, box-shadow 140ms ease;
+      }
+      .item-list li:hover { transform: translateY(-2px); }
+      .item-list li .preview img {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+      }
+      .item-list li .text { flex: 1 1 auto; font-size: 1em; }
+      .item-list li .text h3,
+      .item-list li .text p { margin: 0; }
+
+      /* News list */
+      .news-list { list-style: none; padding: 0; margin: 0; }
+      .news-list li {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+        padding: 12px 14px;
+        border-radius: var(--radius);
+        margin: 10px 0;
+        box-shadow: var(--shadow);
+      }
+
+      /* Details / summary */
+      details { background: color-mix(in srgb, var(--card) 88%, transparent); border: 1px dashed var(--border); padding: 8px 10px; border-radius: 10px; margin: 8px 0; }
+      summary { font-weight: 600; cursor: pointer; }
+
+      /* Chips for Links section */
+      .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+      .chips a {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: var(--shadow);
+      }
+      .chips a:hover { border-color: var(--accent); color: var(--accent); }
+      .chip-icon { width: 1.1em; height: 1.1em; margin-right: 8px; display: inline-block; }
+
+      /* Footer */
+      footer { color: var(--muted); text-align: center; padding: 40px 0; }
+
+      /* Responsive tweaks */
+      @media (max-width: 720px) {
+        .item-list li { flex-direction: column; }
+        .item-list li .preview img { width: 100%; height: auto; }
+        .about img { width: 150px; }
+        .nav .links { display: none; }
+      }
+
+      .cryptedmail:after {
+        content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
+      }
     </style>
+    <script>
+      (function() {
+        const key = 'theme';
+        const btnLabel = () => (document.documentElement.getAttribute('data-theme') === 'light' ? 'Dark mode' : 'Light mode');
+        function applyTheme() {
+          const stored = localStorage.getItem(key);
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.setAttribute('data-theme', stored);
+            return;
+          }
+          const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', prefersLight ? 'light' : 'dark');
+        }
+        function toggleTheme() {
+          const cur = document.documentElement.getAttribute('data-theme');
+          const next = cur === 'light' ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem(key, next);
+          const b = document.getElementById('theme-toggle');
+          if (b) b.textContent = btnLabel();
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+          applyTheme();
+          const b = document.getElementById('theme-toggle');
+          if (b) b.addEventListener('click', toggleTheme);
+          if (b) b.textContent = btnLabel();
+        });
+      })();
+    </script>
   </head>
   <!-- css -->
   <body>
+
+  <body id="top">
+
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand"><a href="#top">Raphael Memmesheimer</a></div>
+        <nav class="links">
+          <a href="#news">News</a>
+          <a href="#publications">Publications</a>
+          <a href="#talks">Talks</a>
+          <a href="#awards">Awards</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">Light/Dark</button>
+      </div>
+    </header>
 
     <div class="container">
 
@@ -111,7 +283,7 @@ From 2016 - 2019 I was team leader of the <a href="https://web.archive.org/web/2
 Most notably during that time we won the RoboCup@Home world championship three consecutive times (four times in total). </p>
 
       <!-- Contact -->
-      <h2> Contact </h2>
+      <h2 id="contact"> Contact </h2>
       <p>
       University of Bonn <br>
       Autonomous Intelligent Systems <br>
@@ -132,14 +304,30 @@ Most notably during that time we won the RoboCup@Home world championship three c
       </p>
 
       <!-- News -->
-      <h2> News </h2>
-      <ul><li> <b>07/2025</b>: We ended up second at RoboCup World Champtionship in Salvador (Brazil). More information <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>. </li><li> <b>03/2025</b>: Our team NimbRo won the RoboCup German Open 2025 in the @Home League. <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">Here</a> you find more information. </li><li> <b>12/2024</b>: The scientific magazine <a href="https://www.wissenschaft.de/bdwplus/die-championsvom-rhein/">Bild der Wissenschaft</a> wrote an article about our robot competition activities. </li><li> <b>09/2024</b>: We were featured by the local broadcasting channel WDR in their news <a href="https://www1.wdr.de/lokalzeit/fernsehen/bonn/bonner-haushaltsroboter-sind-weltmeister-104.html">Lokalzeit</a>.  </li><li> <b>07/2024</b>: We won the <a href="https://www.uni-bonn.de/de/neues/bonner-haushaltsroboter-sind-weltmeister">RoboCup@Home World Championship</a> in the Open Platform League! Find more Info <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>. </li><li> <b>07/2024</b>: Open Vocabulary 6D pose estimation project funded. </li><li> <b>04/2024</b>: Won the <a href="https://github.com/RoboCupAtHome/GermanOpen2024">RoboCup German Open</a> in the @Home League. </li></ul>
+      <h2 id="news"> News </h2>
+      <ul class="news-list"><li> <b>07/2025</b>: We ended up second at RoboCup World Champtionship in Salvador (Brazil). More information <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>. </li><li> <b>03/2025</b>: Our team NimbRo won the RoboCup German Open 2025 in the @Home League. <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">Here</a> you find more information. </li><li> <b>12/2024</b>: The scientific magazine <a href="https://www.wissenschaft.de/bdwplus/die-championsvom-rhein/">Bild der Wissenschaft</a> wrote an article about our robot competition activities. </li><li> <b>09/2024</b>: We were featured by the local broadcasting channel WDR in their news <a href="https://www1.wdr.de/lokalzeit/fernsehen/bonn/bonner-haushaltsroboter-sind-weltmeister-104.html">Lokalzeit</a>.  </li><li> <b>07/2024</b>: We won the <a href="https://www.uni-bonn.de/de/neues/bonner-haushaltsroboter-sind-weltmeister">RoboCup@Home World Championship</a> in the Open Platform League! Find more Info <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>. </li><li> <b>07/2024</b>: Open Vocabulary 6D pose estimation project funded. </li><li> <b>04/2024</b>: Won the <a href="https://github.com/RoboCupAtHome/GermanOpen2024">RoboCup German Open</a> in the @Home League. </li></ul>
 
       <h2> Links </h2>
-      <ul>
-        <li><a href="https://scholar.google.com/citations?hl=en&user=dO9Vh8QAAAAJ">Google Scholar</a></li>
-        <li><a href="https://www.youtube.com/channel/UC-C8dyzYEgCOyyG6rHdu2Kg">Youtube</a></li>
-        <li><a href="https://github.com/raphaelmemmesheimer">Github</a></li>
+
+      <ul class="chips">
+        <li><a href="https://github.com/raphaelmemmesheimer" aria-label="GitHub">
+          <svg class="chip-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.23 3.4 9.66 8.13 11.23.6.12.82-.27.82-.6v-2.16c-3.3.73-4-1.6-4-1.6-.55-1.42-1.34-1.8-1.34-1.8-1.1-.77.08-.76.08-.76 1.22.09 1.86 1.27 1.86 1.27 1.08 1.88 2.83 1.34 3.52 1.03.11-.8.42-1.34.77-1.65-2.63-.3-5.4-1.35-5.4-6 0-1.33.47-2.4 1.25-3.24-.13-.31-.54-1.56.12-3.25 0 0 1.01-.33 3.3 1.24a11.3 11.3 0 0 1 6 0c2.3-1.57 3.3-1.24 3.3-1.24.66 1.69.25 2.94.12 3.25.78.84 1.25 1.91 1.25 3.24 0 4.67-2.78 5.7-5.42 6 .43.37.82 1.1.82 2.22v3.29c0 .33.22.72.83.6A11.52 11.52 0 0 0 23.5 12.3 11.5 11.5 0 0 0 12 .5z"/>
+          </svg>
+          GitHub
+        </a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&user=dO9Vh8QAAAAJ" aria-label="Google Scholar">
+          <svg class="chip-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 3 3 9l9 6 9-6-9-6zm0 8.5L6 8.2v4.9l6 3.8 6-3.8V8.2l-6 3.3z"/>
+          </svg>
+          Scholar
+        </a></li>
+        <li><a href="https://www.youtube.com/channel/UC-C8dyzYEgCOyyG6rHdu2Kg" aria-label="YouTube">
+          <svg class="chip-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.5 7.5s-.23-1.65-.95-2.37c-.9-.95-1.91-.95-2.37-1C16.9 4 12 4 12 4h0s-4.9 0-8.18.13c-.46.05-1.47.05-2.37 1C.73 5.85.5 7.5.5 7.5S.38 9.4.38 11.3v1.37c0 1.9.12 3.8.12 3.8s.23 1.65.95 2.37c.9.95 2.08.92 2.61 1.02C6.3 20 12 20 12 20s4.9 0 8.18-.13c.46-.05 1.47-.05 2.37-1 .72-.72.95-2.37.95-2.37s.12-1.9.12-3.8V11.3c0-1.9-.12-3.8-.12-3.8zM9.8 14.8V8.8l6.2 3-6.2 3z"/>
+          </svg>
+          YouTube
+        </a></li>
       </ul>
 
       <!-- Menu -->
@@ -1204,7 +1392,7 @@ Most notably during that time we won the RoboCup@Home world championship three c
             <img src="data/images/talk_previews/" alt="RimA Summer School 2025">
           </div-->
           <div class="text">
-            <b>[Scientific Keynote] Advancing Autonomous Service Robots: From Human Intelligence to Embodied Articifial Intelligence in Domestic Environments}</b>
+            <b>[Scientific Keynote] Advancing Autonomous Service Robots: From Human Intelligence to Embodied Articifial Intelligence in Domestic Environments</b>
             <br>
             RimA Summer School 2025
             Karlsruhe, Germany
