@@ -176,7 +176,7 @@ h3 { margin: 18px 0 8px; color: var(--muted); }
   border-radius: 14px;
   float: right;
   margin-left: 24px;
-  box-shadow: var(--shadow);
+  margin-top: 30px;
 }
 
 /* Generic links */
