@@ -250,6 +250,63 @@ a:hover { color: var(--accent-2); }
 .video-list li .text h3,
 .video-list li .text p { margin: 0; }
 
+/* Horizontal competition timeline - alternating labels above/below the line */
+.timeline-h-wrap { margin: 14px 0 20px; }
+.timeline-h { list-style: none; display: flex; margin: 0; padding: 0 30px; position: relative; }
+.timeline-h::before {
+  content: ""; position: absolute; top: 50%; height: 2px;
+  /* span from the first to the last medal center: padding + half a slot */
+  left: calc(30px + (100% - 60px) / 24);
+  right: calc(30px + (100% - 60px) / 24);
+  margin-top: -1px;
+  background: var(--border);
+}
+.timeline-h li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 265px;
+}
+.timeline-h .medal {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72em; font-weight: 700;
+  border: 2px solid;
+  box-shadow: var(--shadow);
+}
+.medal-1 { background: #fde68a; color: #92400e; border-color: #f59e0b; }
+.medal-2 { background: #e5e7eb; color: #374151; border-color: #9ca3af; }
+.medal-3 { background: #fed7aa; color: #7c2d12; border-color: #ea580c; }
+.timeline-h .th-text {
+  position: absolute; left: 50%;
+  transform: translateX(-50%);
+  width: 140px; text-align: center; line-height: 1.3;
+}
+.timeline-h li:nth-child(odd) .th-text { bottom: calc(50% + 26px); }
+.timeline-h li:nth-child(even) .th-text { top: calc(50% + 26px); }
+.timeline-h .th-year { display: block; font-weight: 700; }
+.timeline-h .th-event { display: block; font-size: 0.82em; }
+.timeline-h .th-loc { display: block; color: var(--muted); font-size: 0.75em; }
+@media (max-width: 700px) {
+  .timeline-h-wrap { overflow-x: auto; }
+  .timeline-h li { min-width: 84px; }
+}
+
+/* Award badge - best paper etc. */
+.pub-award {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+  font-size: 0.82em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* Record list - funding, service, supervision */
 .record-list { list-style: none; margin: 14px 0; padding: 0; }
 .record-list li { display: flex; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--border); }
