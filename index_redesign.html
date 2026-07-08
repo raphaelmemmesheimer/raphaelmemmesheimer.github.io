@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raphael Memmesheimer</title>
+    <link rel="icon" type="image/png" href="data/images/favicon.png">
+    <meta name="description" content="Raphael Memmesheimer, Postdoctoral Researcher in robotics at the University of Bonn (Autonomous Intelligent Systems). Service robots, multi-modal perception, learning from human behavior. Leader of the NimbRo@Home team, five-time RoboCup@Home world champion.">
+    <meta property="og:title" content="Raphael Memmesheimer">
+    <meta property="og:description" content="Postdoctoral Researcher in robotics at the University of Bonn. Service robots, multi-modal perception, learning from human behavior.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raphaelmemmesheimer.github.io/">
+    <meta property="og:image" content="https://raphaelmemmesheimer.github.io/data/images/raphael_memmesheimer_circle.png">
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --surface: #ffffff;
+        --text: #101828;
+        --muted: #5b6472;
+        --accent: #2563eb;
+        --accent-2: #0ea5e9;
+        --border: #e6e9ef;
+        --shadow: 0 1px 2px rgba(16,24,40,0.05), 0 8px 24px rgba(16,24,40,0.06);
+        --radius: 16px;
+        --radius-sm: 10px;
+        --maxw: 1060px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1220;
+          --surface: #121a2b;
+          --text: #e7ecf4;
+          --muted: #9aa5b5;
+          --accent: #60a5fa;
+          --accent-2: #38bdf8;
+          --border: #223050;
+          --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.35);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: clamp(15px, 1.05vw, 17px);
+        line-height: 1.65;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+      /* Nav */
+      .site-header {
+        position: sticky; top: 0; z-index: 50;
+        background: color-mix(in oklab, var(--bg) 82%, transparent);
+        backdrop-filter: blur(12px) saturate(1.2);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; flex-wrap: wrap; }
+      .brand { font-weight: 700; letter-spacing: 0.2px; }
+      .brand a { color: var(--text); }
+      .nav-links { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+      .nav-links a { color: var(--muted); font-size: 0.92em; padding: 4px 2px; }
+      .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        padding: 56px 0 40px;
+        background:
+          radial-gradient(900px 420px at 12% -10%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 65%),
+          radial-gradient(700px 380px at 90% -20%, color-mix(in oklab, var(--accent-2) 14%, transparent), transparent 60%);
+      }
+      .hero-inner { display: flex; gap: 40px; align-items: center; }
+      .hero-text { flex: 1 1 auto; }
+      .hero h1 { margin: 0 0 4px; font-size: clamp(1.9em, 3.4vw, 2.6em); line-height: 1.15; }
+      .hero .role { color: var(--muted); font-size: 1.08em; margin: 0 0 18px; }
+      .hero .role a { color: inherit; text-decoration: underline dotted; }
+      .portrait { flex: 0 0 auto; }
+      .portrait img {
+        width: 210px; height: 210px; border-radius: 50%; object-fit: cover; display: block;
+        border: 4px solid var(--surface);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 55%, transparent), var(--shadow);
+      }
+      .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 18px 0 0; }
+      .chips a {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 7px 14px; border-radius: 999px;
+        background: var(--surface); border: 1px solid var(--border);
+        color: var(--text); font-size: 0.9em; box-shadow: var(--shadow);
+      }
+      .chips a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+      .chip-icon { width: 1.05em; height: 1.05em; }
+
+      /* Highlight stats */
+      .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 30px 0 0; padding: 0; list-style: none; }
+      .stats li {
+        background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 14px 18px; box-shadow: var(--shadow);
+      }
+      .stats .num { font-size: 1.45em; font-weight: 700; color: var(--accent); line-height: 1.2; }
+      .stats .label { color: var(--muted); font-size: 0.88em; }
+
+      /* Sections */
+      section { padding: 34px 0 6px; }
+      h2 {
+        font-size: 1.45em; margin: 0 0 18px; display: flex; align-items: center; gap: 12px;
+      }
+      h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+      .about-card {
+        background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 8px 26px; box-shadow: var(--shadow);
+      }
+
+      /* News timeline */
+      .news-list { list-style: none; margin: 0; padding: 0; position: relative; }
+      .news-list::before {
+        content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px;
+        background: var(--border);
+      }
+      .news-list li { position: relative; padding: 0 0 14px 30px; }
+      .news-list li::before {
+        content: ""; position: absolute; left: 0; top: 9px; width: 12px; height: 12px; border-radius: 50%;
+        background: var(--accent); border: 2px solid var(--bg);
+      }
+      .news-list .date {
+        font-weight: 600; font-size: 0.85em; color: var(--accent);
+        letter-spacing: 0.3px; display: block; line-height: 1.3;
+      }
+
+      /* Gallery */
+      .gallery-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+      .gallery-grid a { display: block; position: relative; overflow: hidden; border-radius: var(--radius-sm); border: 1px solid var(--border); box-shadow: var(--shadow); }
+      .gallery-grid img { display: block; width: 100%; height: 150px; object-fit: cover; transition: transform 160ms ease; }
+      .gallery-grid a:hover img { transform: scale(1.05); }
+      .gallery-grid .play-badge { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+      .gallery-grid .play-badge svg { width: 44px; height: 44px; padding: 11px; color: #fff; background: rgba(2,6,23,0.55); border-radius: 50%; transition: background 160ms ease; }
+      .gallery-grid a:hover .play-badge svg { background: var(--accent); }
+      .gallery-caption { margin-top: 6px; font-size: 0.84em; color: var(--muted); line-height: 1.4; }
+
+      /* Publications */
+      .year-nav { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 10px; }
+      .year-nav a {
+        display: inline-block; padding: 4px 13px; border-radius: 999px; font-size: 0.88em;
+        background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+      }
+      .year-nav a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+      h3.pub-year { margin: 26px 0 10px; font-size: 1.1em; color: var(--muted); }
+      .pub-list { list-style: none; margin: 0; padding: 0; }
+      .pub-list li {
+        display: flex; gap: 18px; align-items: flex-start;
+        background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+        box-shadow: var(--shadow); padding: 16px; margin: 0 0 12px;
+        transition: transform 140ms ease;
+      }
+      .pub-list li:hover { transform: translateY(-2px); }
+      .pub-list img { width: 96px; height: 96px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); flex: 0 0 auto; }
+      .pub-list .title { font-weight: 650; }
+      .pub-list .authors { color: var(--muted); font-size: 0.92em; }
+      .pub-list .venue { font-size: 0.92em; }
+      .pub-list details { font-size: 0.9em; color: var(--muted); margin-top: 4px; }
+      .pub-list summary { cursor: pointer; color: var(--accent); }
+      .pub-links { margin-top: 4px; font-size: 0.9em; }
+      .pub-links a {
+        display: inline-block; margin: 2px 6px 0 0; padding: 2px 10px; border-radius: 999px;
+        border: 1px solid var(--border); font-size: 0.92em;
+      }
+      .pub-links a:hover { border-color: var(--accent); text-decoration: none; }
+
+      /* Contact / footer */
+      .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+      .contact-card {
+        background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 18px 22px; box-shadow: var(--shadow);
+      }
+      .contact-card h3 { margin: 0 0 8px; font-size: 1em; }
+      footer { margin-top: 40px; padding: 22px 0 30px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.88em; }
+      .cryptedmail::after { content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); }
+
+      @media (max-width: 720px) {
+        .hero-inner { flex-direction: column-reverse; text-align: center; }
+        .chips { justify-content: center; }
+        .portrait img { width: 160px; height: 160px; }
+        .pub-list li { flex-direction: column; }
+        .pub-list img { width: 100%; height: 140px; }
+      }
+    </style>
+  </head>
+  <body id="top">
+
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand"><a href="#top">Raphael Memmesheimer</a></div>
+        <nav class="nav-links">
+          <a href="#news">News</a>
+          <a href="#gallery">Robots</a>
+          <a href="#publications">Publications</a>
+          <a href="media.html">Media</a>
+          <a href="teaching.html">Teaching</a>
+          <a href="talks.html">Talks</a>
+          <a href="awards.html">Awards</a>
+          <a href="service.html">Service</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Raphael Memmesheimer</h1>
+          <p class="role">Postdoctoral Researcher · <a href="https://www.ais.uni-bonn.de">Autonomous Intelligent Systems</a>, University of Bonn · Team leader <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">NimbRo@Home</a></p>
+          <ul class="chips">
+            <li><a href="https://github.com/raphaelmemmesheimer" aria-label="GitHub">
+              <svg class="chip-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.23 3.4 9.66 8.13 11.23.6.12.82-.27.82-.6v-2.16c-3.3.73-4-1.6-4-1.6-.55-1.42-1.34-1.8-1.34-1.8-1.1-.77.08-.76.08-.76 1.22.09 1.86 1.27 1.86 1.27 1.08 1.88 2.83 1.34 3.52 1.03.11-.8.42-1.34.77-1.65-2.63-.3-5.4-1.35-5.4-6 0-1.33.47-2.4 1.25-3.24-.13-.31-.54-1.56.12-3.25 0 0 1.01-.33 3.3 1.24a11.3 11.3 0 0 1 6 0c2.3-1.57 3.3-1.24 3.3-1.24.66 1.69.25 2.94.12 3.25.78.84 1.25 1.91 1.25 3.24 0 4.67-2.78 5.7-5.42 6 .43.37.82 1.1.82 2.22v3.29c0 .33.22.72.83.6A11.52 11.52 0 0 0 23.5 12.3 11.5 11.5 0 0 0 12 .5z"/></svg>
+              GitHub</a></li>
+            <li><a href="https://scholar.google.com/citations?hl=en&user=dO9Vh8QAAAAJ" aria-label="Google Scholar">
+              <svg class="chip-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 3 9l9 6 9-6-9-6zm0 8.5L6 8.2v4.9l6 3.8 6-3.8V8.2l-6 3.3z"/></svg>
+              Scholar</a></li>
+            <li><a href="https://www.youtube.com/channel/UC-C8dyzYEgCOyyG6rHdu2Kg" aria-label="YouTube">
+              <svg class="chip-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 7.5s-.23-1.65-.95-2.37c-.9-.95-1.91-.95-2.37-1C16.9 4 12 4 12 4h0s-4.9 0-8.18.13c-.46.05-1.47.05-2.37 1C.73 5.85.5 7.5.5 7.5S.38 9.4.38 11.3v1.37c0 1.9.12 3.8.12 3.8s.23 1.65.95 2.37c.9.95 2.08.92 2.61 1.02C6.3 20 12 20 12 20s4.9 0 8.18-.13c.46-.05 1.47-.05 2.37-1 .72-.72.95-2.37.95-2.37s.12-1.9.12-3.8V11.3c0-1.9-.12-3.8-.12-3.8zM9.8 14.8V8.8l6.2 3-6.2 3z"/></svg>
+              YouTube</a></li>
+            <li><a href="https://orcid.org/0000-0003-3602-754X" aria-label="ORCID">
+              <img class="chip-icon" src="data/images/icons/ORCID-iD_icon_vector.svg" alt="">
+              ORCID</a></li>
+          </ul>
+          <ul class="stats">
+            <li><div class="num">5×</div><div class="label">RoboCup@Home World Champion</div></li>
+            <li><div class="num">XPRIZE</div><div class="label">ANA Avatar Challenge winner (NimbRo)</div></li>
+            <li><div class="num">46</div><div class="label">Publications</div></li>
+          </ul>
+        </div>
+        <div class="portrait">
+          <img src="data/images/raphael_memmesheimer_circle_talk.png" alt="Raphael Memmesheimer">
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- About -->
+      <section id="about">
+        <h2>About</h2>
+        <div class="about-card">
+          <p>My long-term research goal is to develop autonomous service robots that assist people in everyday environments: robots that perceive, understand, and learn from human behavior using multi-modal sensory information, and that prove themselves outside the lab. My work pursues this goal along three threads:</p>
+<ul>
+<li><strong>Multi-modal perception and action understanding.</strong> Recognizing and segmenting human actions in time-series data such as videos, inertial measurement units (IMUs), Wi-Fi CSI fingerprints, and skeleton sequences, so that robots understand and respond to human activities robustly and naturally.</li>
+<li><strong>Learning from human behavior.</strong> Enabling robots to acquire new skills from human demonstrations and multi-modal observations rather than explicit programming.</li>
+<li><strong>Integrated service robots in the real world.</strong> Building complete domestic service robots that combine perception, task planning, mobile manipulation, and human-robot interaction, and validating them in international competitions as real-world benchmarks.</li>
+</ul>
+<p>I am a Postdoctoral Researcher at the <a href="https://www.ais.uni-bonn.de">Autonomous Intelligent Systems (AIS)</a> group of <a href="https://www.ais.uni-bonn.de/behnke/">Prof. Dr. Sven Behnke</a> at the University of Bonn, where I re-initiated and lead the <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">NimbRo@Home</a> team. I am also a founding member of the <a href="https://robotics.uni-bonn.de">Center for Robotics</a> at the University of Bonn. I completed my PhD in the <a href="https://agas.uni-koblenz.de/">Active Vision Group</a> under <a href="https://www.uni-koblenz.de/de/informatik/icv/paulus/team/dietrich-paulus">Prof. Dr. Dietrich Paulus</a> at the University of Koblenz, with a thesis on multi-modal action recognition in time-series data.</p>
+<p>Robot competitions serve as rigorous, real-world benchmarks for this research: as team leader, I have guided teams at two universities to multiple championship titles, including winning the RoboCup@Home World Championship five times (with three consecutive victories) and top placements in the European Robotics League and the World Robot Summit. As a member of the <a href="https://www.ais.uni-bonn.de/nimbro/AVATAR/">NimbRo Avatar</a> team, I contributed to winning the ANA Avatar XPRIZE challenge with a grand prize of 5 million USD.</p>
+        </div>
+      </section>
+
+      <!-- News -->
+      <section id="news">
+        <h2>News</h2>
+        <ul class="news-list"><li><span class="date">07/2026</span> Best Paper Award for the paper: Efficient Image Annotation via Semi-Supervised Object Segmentation with Label Propagation, at the RoboCup Symposium.</li><li><span class="date">07/2026</span> We were placed 3rd out of 24 teams at the RoboCup@Home World Championship in Seoul (South Korea). More information <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>.</li><li><span class="date">03/2026</span> The NimbRo@Home team won the RoboCup German Open 2026 in the @Home League. More information on our <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">website</a>.</li><li><span class="date">07/2025</span> We ended up second at RoboCup World Championship in Salvador (Brazil). More information <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>.</li><li><span class="date">03/2025</span> Our team NimbRo won the RoboCup German Open 2025 in the @Home League. <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">Here</a> you find more information.</li><li><span class="date">12/2024</span> The scientific magazine <a href="https://www.wissenschaft.de/bdwplus/die-championsvom-rhein/">Bild der Wissenschaft</a> wrote an article about our robot competition activities.</li><li><span class="date">09/2024</span> We were featured by the local broadcasting channel WDR in their news <a href="https://www1.wdr.de/lokalzeit/fernsehen/bonn/bonner-haushaltsroboter-sind-weltmeister-104.html">Lokalzeit</a>. </li><li><span class="date">07/2024</span> We won the <a href="https://www.uni-bonn.de/de/neues/bonner-haushaltsroboter-sind-weltmeister">RoboCup@Home World Championship</a> in the Open Platform League! Find more Info <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">here</a>.</li><li><span class="date">07/2024</span> Open Vocabulary 6D pose estimation project funded.</li><li><span class="date">04/2024</span> Won the <a href="https://github.com/RoboCupAtHome/GermanOpen2024">RoboCup German Open</a> in the @Home League.</li></ul>
+      </section>
+
+      <!-- Gallery -->
+      <section id="gallery">
+        <h2>Robots in Action</h2>
+        <ul class="gallery-grid"><li>
+            <a href="https://www.youtube.com/watch?v=RAC07ojKt6s" target="_blank"
+               aria-label="Watch video: Getting a beer from the fridge">
+              <img src="data/images/gallery/robots/small/get_beer.jpg" alt="Getting a beer from the fridge" loading="lazy"><span class="play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span></a>
+            <div class="gallery-caption">Getting a beer from the fridge</div>
+          </li><li>
+            <a href="https://www.youtube.com/watch?v=vx3QdaPD8bw" target="_blank"
+               aria-label="Watch video: Cleaning a toilet at World Robot Summit 2018, Tokyo">
+              <img src="data/images/gallery/robots/small/tiago_cleaning_toilet.jpg" alt="Cleaning a toilet at World Robot Summit 2018, Tokyo" loading="lazy"><span class="play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span></a>
+            <div class="gallery-caption">Cleaning a toilet at World Robot Summit 2018, Tokyo</div>
+          </li><li>
+            <a href="https://www.youtube.com/watch?v=9tHCVgKY1ak" target="_blank"
+               aria-label="Watch video: Human-robot collaborative manipulation">
+              <img src="data/images/gallery/robots/small/human_robot_collaboration_table.jpg" alt="Human-robot collaborative manipulation" loading="lazy"><span class="play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span></a>
+            <div class="gallery-caption">Human-robot collaborative manipulation</div>
+          </li><li>
+            <a href="https://www.youtube.com/watch?v=pesJ_xXQqH0" target="_blank"
+               aria-label="Watch video: ICRA DJI Mobile Manipulation Challenge">
+              <img src="data/images/gallery/robots/small/icra_mmc_video_preview.jpg" alt="ICRA DJI Mobile Manipulation Challenge" loading="lazy"><span class="play-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span></a>
+            <div class="gallery-caption">ICRA DJI Mobile Manipulation Challenge</div>
+          </li><li>
+            <a href="data/images/gallery/robots/robot_pushing_chair.jpg" target="_blank"
+               aria-label="Tidying up: robot pushing a chair">
+              <img src="data/images/gallery/robots/small/robot_pushing_chair.jpg" alt="Tidying up: robot pushing a chair" loading="lazy"></a>
+            <div class="gallery-caption">Tidying up: robot pushing a chair</div>
+          </li></ul>
+      </section>
+
+      <!-- Publications -->
+      <section id="publications">
+        <h2>Publications</h2>
+        <ul class="year-nav" aria-label="Jump to publication year"><li><a href="#pub-2026">2026</a></li><li><a href="#pub-2025">2025</a></li><li><a href="#pub-2024">2024</a></li><li><a href="#pub-2023">2023</a></li><li><a href="#pub-2022">2022</a></li><li><a href="#pub-2021">2021</a></li><li><a href="#pub-2020">2020</a></li><li><a href="#pub-2019">2019</a></li><li><a href="#pub-2018">2018</a></li><li><a href="#pub-2017">2017</a></li><li><a href="#pub-2016">2016</a></li><li><a href="#pub-2015">2015</a></li></ul><h3 class="pub-year" id="pub-2026">2026</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/tutevych2026efficient.jpg" alt="tutevych2026efficient" loading="lazy">
+            <div class="text">
+              <div class="title">Efficient Image Annotation via Semi-Supervised Object Segmentation with Label Propagation</div>
+              <div class="authors">Tutevych, Vitalii; Memmesheimer, Raphael; Eichler, Luca; Pavlichenko, Dmytro; Schilke, Fynn; Krudewig, Rodja; Behnke, Sven</div>
+              <div class="venue">
+                RoboCup 2026: Robot World Cup (Accepted for publication)
+                
+                
+                (2026)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2604.22992">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/label_propagation">github</a>
+                    
+                  
+                    
+                      <a href="">project_page</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/memmesheimer2026adaptive.jpg" alt="memmesheimer2026adaptive" loading="lazy">
+            <div class="text">
+              <div class="title">Adaptive Domestic Service Robotics through Foundation Models for Perception, Interaction, and Action</div>
+              <div class="authors">Memmesheimer, Raphael; Pavlichenko, Dmytro; Kruzhkov, Evgenii; Bode, Jonas; Schilke, Fynn; Tutevych, Vitalii; Lenz, Christian; Schreiber, Michael; Behnke, Sven</div>
+              <div class="venue">
+                Proceedings of the 2nd German Robotics Conference (GRC) (Accepted for presentation)
+                
+                
+                (2026)
+                
+              </div>
+              
+              <div class="pub-links">
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/kruzhkov2026omcl.jpg" alt="kruzhkov2026omcl" loading="lazy">
+            <div class="text">
+              <div class="title">OMCL: Open-vocabulary Monte Carlo Localization</div>
+              <div class="authors">Kruzhkov, Evgenii; Memmesheimer, Raphael; Behnke, Sven</div>
+              <div class="venue">
+                IEEE Robotics and Automation Letters (RAL)
+                
+                (2026)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/lra.2026.3653333">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2512.15557">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/omcl">github</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/bode2026el3dd.jpg" alt="bode2026el3dd" loading="lazy">
+            <div class="text">
+              <div class="title">EL3DD: Extended Latent 3D Diffusion for Language Conditioned Multitask Manipulation</div>
+              <div class="authors">Bode, Jonas; Memmesheimer, Raphael; Behnke, Sven</div>
+              <div class="venue">
+                Accepted for European Robotics Forum (ERF), Stavanger, Norway, March 2026
+                
+                
+                (2026)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2511.13312">arxiv</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/bultmann2024anticipating.jpg" alt="bultmann2024anticipating" loading="lazy">
+            <div class="text">
+              <div class="title">Anticipating Human Behavior for Safe Navigation and Efficient Collaborative Manipulation with Mobile Service Robots</div>
+              <div class="authors">Bultmann, Simon; Memmesheimer, Raphael; Nogga, Jan; Hau, Julian; Behnke, Sven</div>
+              <div class="venue">
+                2026 IEEE/SICE International Symposium on System Integration, SII
+                
+                
+                (2026)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/SII64115.2026.11404618">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://www.youtube.com/watch?v=9tHCVgKY1ak">video</a>
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2410.05015">arxiv</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2025">2025</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/schoenbach2025tiago.jpg" alt="schoenbach2025tiago" loading="lazy">
+            <div class="text">
+              <div class="title">Integration of the TIAGo Robot into Isaac Sim with Mecanum Drive Modeling and Learned S-Curve Velocity Profiles</div>
+              <div class="authors">Schönbach, Vincent; Wiedemann, Marvin; Memmesheimer, Raphael; Mosbach, Malte; Behnke, Sven</div>
+              <div class="venue">
+                2025 IEEE 21st International Conference on Automation Science and Engineering (CASE)
+                
+                 IEEE
+                (2025)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/case58245.2025.11163930">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2510.10273">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/tiago_isaac">github</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/wang2025liam.jpg" alt="wang2025liam" loading="lazy">
+            <div class="text">
+              <div class="title">LIAM: Multimodal Transformer for Language Instructions, Images, Actions and Semantic Maps</div>
+              <div class="authors">Wang, Yihao; Memmesheimer, Raphael; Behnke, Sven</div>
+              <div class="venue">
+                19th International Conference on Intelligent Autonomous Systems (IAS) (Accepted for publication)
+                
+                
+                (2025)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2503.12230">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/LIAM">github</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/bultmann2025anticipating.jpg" alt="bultmann2025anticipating" loading="lazy">
+            <div class="text">
+              <div class="title">Anticipating Human Behavior for Safe and Efficient Collaborative Mobile Manipulation</div>
+              <div class="authors">Bultmann, Simon; Memmesheimer, Raphael; Nogga, Jan; Hau, Julian; Behnke, Sven</div>
+              <div class="venue">
+                Proceedings of the 1st German Robotics Conference (GRC) (Accepted for presentation)
+                
+                
+                (2025)
+                
+              </div>
+              
+              <div class="pub-links">
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/seliunina2025person.jpg" alt="seliunina2025person" loading="lazy">
+            <div class="text">
+              <div class="title">Person Segmentation and Action Classification for Multi-Channel Hemisphere Field of View LiDAR Sensors</div>
+              <div class="authors">Seliunina, Svetlana; Otelepko, Artem; Memmesheimer, Raphael; Behnke, Sven</div>
+              <div class="venue">
+                IEEE/SICE International Symposium on System Integration, SII 2025, Munich, Germany, January 21-24, 2025
+                
+                 IEEE
+                (2025)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/SII59315.2025.10871131">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2411.11151">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/lidar_person_action_detection">github</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/lenz2025nimbro.jpg" alt="lenz2025nimbro" loading="lazy">
+            <div class="text">
+              <div class="title">NimbRo Wins ANA Avatar XPRIZE Immersive Telepresence Competition: Human-Centric Evaluation and Lessons Learned</div>
+              <div class="authors">Lenz, Christian; Schwarz, Max; Rochow, Andre; Pätzold, Bastian; Memmesheimer, Raphael; Schreiber, Michael; Behnke, Sven</div>
+              <div class="venue">
+                Int. J. Soc. Robotics
+                
+                (2025)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/s12369-023-01050-9">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://www.youtube.com/watch?v=8AwgGSpcAe8">video</a>
+                    
+                  
+                    
+                      <a href="https://www.ais.uni-bonn.de/nimbro/AVATAR/">project_page</a>
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2303.03297">arxiv</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2024">2024</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/memmesheimer2024winning.jpg" alt="memmesheimer2024winning" loading="lazy">
+            <div class="text">
+              <div class="title">RoboCup@Home 2024 OPL Winner NimbRo: Anthropomorphic Service Robots Using Foundation Models for Perception and Planning</div>
+              <div class="authors">Memmesheimer, Raphael; Nogga, Jan; Pätzold, Bastian; Kruzhkov, Evgenii; Bultmann, Simon; Schreiber, Michael; Bode, Jonas; Karacora, Bertan; Park, Juhui; Savinykh, Alena; Behnke, Sven</div>
+              <div class="venue">
+                RoboCup 2024: Robot World Cup XXVII
+                
+                 Springer
+                (2024)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-031-85859-8_44">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://www.ais.uni-bonn.de/nimbro/@Home/">project_page</a>
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2412.14989">arxiv</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Bode2024ACP.jpg" alt="Bode2024ACP" loading="lazy">
+            <div class="text">
+              <div class="title">A Comparison of Prompt Engineering Techniques for Task Planning and Execution in Service Robotics</div>
+              <div class="authors">Bode, Jonas; Pätzold, Bastian; Memmesheimer, Raphael; Behnke, Sven</div>
+              <div class="venue">
+                23rd IEEE-RAS International Conference on Humanoid Robots, Humanoids 2024, Nancy, France, November 22-24, 2024
+                
+                 IEEE
+                (2024)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/Humanoids58906.2024.10769825">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/pdf/2410.22997">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/Prompt_Engineering">github</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/memmesheimer2024self.jpg" alt="memmesheimer2024self" loading="lazy">
+            <div class="text">
+              <div class="title">Self-centering 3-DOF feet controller for hands-free locomotion control in telepresence and virtual reality</div>
+              <div class="authors">Memmesheimer, Raphael; Lenz, Christian; Schwarz, Max; Schreiber, Michael; Behnke, Sven</div>
+              <div class="venue">
+                2024 IEEE Conference on Telepresence
+                
+                
+                (2024)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/Telepresence63209.2024.10841525">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://www.youtube.com/watch?v=z8Ul552-8KM">video</a>
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2408.02319">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://github.com/AIS-Bonn/hands-free_locomotion_controller">github</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/memmesheimer2024cleaning.jpg" alt="memmesheimer2024cleaning" loading="lazy">
+            <div class="text">
+              <div class="title">Cleaning Robots in Public Spaces: A Survey and Proposal for Benchmarking Based on Stakeholders Interviews</div>
+              <div class="authors">Memmesheimer, Raphael; Overbeck, Martina; Kral, Björn; Steffen, Lea; Behnke, Sven; Gersch, Martin; Roennau, Arne</div>
+              <div class="venue">
+                RoboCup 2024: Robot World Cup XXVII
+                
+                 Springer
+                (2024)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-031-85859-8_32">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2407.16393">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://www.roboter-im-alltag.org/aktuelles/publikationen/">project_page</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2023">2023</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/patzold2023audio.jpg" alt="patzold2023audio" loading="lazy">
+            <div class="text">
+              <div class="title">Audio-Based Roughness Sensing and Tactile Feedback for Haptic Perception in Telepresence</div>
+              <div class="authors">Pätzold, Bastian; Rochow, Andre; Schreiber, Michael; Memmesheimer, Raphael; Lenz, Christian; Schwarz, Max; Behnke, Sven</div>
+              <div class="venue">
+                IEEE International Conference on Systems, Man, and Cybernetics, SMC 2023, Honolulu, Oahu, HI, USA, October 1-4, 2023
+                
+                 IEEE
+                (2023)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/SMC53992.2023.10394062">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2303.07186">arxiv</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/schwarz2023robust.jpg" alt="schwarz2023robust" loading="lazy">
+            <div class="text">
+              <div class="title">Robust Immersive Telepresence and Mobile Telemanipulation: NimbRo wins ANA Avatar XPRIZE Finals</div>
+              <div class="authors">Schwarz, Max; Lenz, Christian; Memmesheimer, Raphael; Pätzold, Bastian; Rochow, Andre; Schreiber, Michael; Behnke, Sven</div>
+              <div class="venue">
+                22nd IEEE-RAS International Conference on Humanoid Robots, Humanoids 2023, Austin, TX, USA, December 12-14, 2023
+                
+                 IEEE
+                (2023)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/Humanoids57100.2023.10375179">DOI</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="https://www.youtube.com/watch?v=8AwgGSpcAe8">video</a>
+                    
+                  
+                    
+                      <a href="https://arxiv.org/abs/2308.12238">arxiv</a>
+                    
+                  
+                    
+                      <a href="https://www.ais.uni-bonn.de/nimbro/AVATAR/">project_page</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Bultmann2023ECM.jpg" alt="Bultmann2023ECM" loading="lazy">
+            <div class="text">
+              <div class="title">External Camera-Based Mobile Robot Pose Estimation for Collaborative Perception with Smart Edge Sensors</div>
+              <div class="authors">Bultmann, Simon; Memmesheimer, Raphael; Behnke, Sven</div>
+              <div class="venue">
+                IEEE International Conference on Robotics and Automation, ICRA 2023, London, UK, May 29 - June 2, 2023
+                
+                 IEEE
+                (2023)
+                
+              </div>
+              
+              <div class="pub-links"><a href="https://www.youtube.com/watch?v=e2LpcZDWaZc">video</a><a href="https://arxiv.org/abs/2303.03797">arxiv</a>
+                    <a href="https://doi.org/10.1109/ICRA48891.2023.10160892">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Pavlichenko2023RC2.jpg" alt="Pavlichenko2023RC2" loading="lazy">
+            <div class="text">
+              <div class="title">RoboCup 2022 AdultSize Winner NimbRo: Upgraded Perception, Capture Steps Gait and Phase-Based In-Walk Kicks</div>
+              <div class="authors">Pavlichenko, Dmytro; Ficht, Grzegorz; Amini, Arash; Hosseini, Mojtaba; Memmesheimer, Raphael; Villar-Corrales, Angel; Schulz, Stefan M.; Missura, Marcell; Bennewitz, Maren; Behnke, Sven</div>
+              <div class="venue">
+                RoboCup 2022: Robot World Cup XXV [Bangkok, Thailand, July 11-17, 2022]
+                
+                 Springer
+                (2023)
+                
+              </div>
+              
+              <div class="pub-links"><a href="https://www.youtube.com/watch?v=DfzkMawtSFA">video</a><a href="https://arxiv.org/abs/2302.02956">arxiv</a>
+                    <a href="https://doi.org/10.1007/978-3-031-28469-4_20">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/phdthesis.jpg" alt="phdthesis" loading="lazy">
+            <div class="text">
+              <div class="title">On the recognition of human activities and the evaluation of its imitation by robotic systems</div>
+              <div class="authors">Memmesheimer, Raphael</div>
+              <div class="venue">
+                
+                
+                (2023)
+                
+              </div>
+              
+              <div class="pub-links">PhD thesis
+                    <a href="https://kola.opus.hbz-nrw.de/frontdoor/index/index/docId/2396">url</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Germann2023RSR.jpg" alt="Germann2023RSR" loading="lazy">
+            <div class="text">
+              <div class="title">Reduced Skeleton Representation for Action Recognition on Graph Convolutional Neural Networks</div>
+              <div class="authors">Germann, Ida; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                IEEE/SICE International Symposium on System Integration, SII 2023, Atlanta, GA, USA, January 17-20, 2023
+                
+                 IEEE
+                (2023)
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/SII55687.2023.10039092">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Kramer2023COP.jpg" alt="Kramer2023COP" loading="lazy">
+            <div class="text">
+              <div class="title">Classification of pathological and healthy individuals for computer-aided physical rehabilitation</div>
+              <div class="authors">Kramer, Ivanna; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                IEEE/SICE International Symposium on System Integration, SII 2023, Atlanta, GA, USA, January 17-20, 2023
+                
+                 IEEE
+                (2023)
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/SII55687.2023.10039185">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2022">2022</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/vonGladiss2022DAF.jpg" alt="vonGladiss2022DAF" loading="lazy">
+            <div class="text">
+              <div class="title">Data augmentation for training a neural network for image reconstruction in MPI</div>
+              <div class="authors">von Gladiss, Anselm; Kramer, Ivanna; Theisen, Nick; Memmesheimer, Raphael; Bakenecker, Anna C.; Buzug, Thorsten M.; Paulus, Dietrich</div>
+              <div class="venue">
+                International Workshop on Magnetic Particle Imaging
+                
+                
+                (2022)
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.18416/IJMPI.2022.2203058">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/vonGladiss2022RO1.jpg" alt="vonGladiss2022RO1" loading="lazy">
+            <div class="text">
+              <div class="title">Reconstruction of 1D Images with a Neural Network for Magnetic Particle Imaging</div>
+              <div class="authors">von Gladiss, Anselm; Memmesheimer, Raphael; Theisen, Nick; Bakenecker, Anna C.; Buzug, Thorsten M.; Paulus, Dietrich</div>
+              <div class="venue">
+                Bildverarbeitung f\"ur die Medizin 2022 - Proceedings, German Workshop on Medical Image Computing, Heidelberg, June 26-28, 2022
+                
+                 Springer
+                (2022)
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-658-36932-3_52">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2022SDM.jpg" alt="Memmesheimer2022SDM" loading="lazy">
+            <div class="text">
+              <div class="title">Skeleton-DML: Deep Metric Learning for Skeleton-Based One-Shot Action Recognition</div>
+              <div class="authors">Memmesheimer, Raphael; Häring, Simon; Theisen, Nick; Paulus, Dietrich</div>
+              <div class="venue">
+                IEEE/CVF Winter Conference on Applications of Computer Vision, WACV 2022, Waikoloa, HI, USA, January 3-8, 2022
+                
+                 IEEE
+                (2022)
+                
+              </div>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/2012.13823">arxiv</a><a href="https://www.youtube.com/watch?v=jH5eMDZfMyY">video</a><a href="https://github.com/raphaelmemmesheimer/skeleton-dml">github</a>
+                    <a href="https://doi.org/10.1109/WACV51458.2022.00091">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2021">2021</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Duhme2021FMA.jpg" alt="Duhme2021FMA" loading="lazy">
+            <div class="text">
+              <div class="title">Fusion-GCN: Multimodal Action Recognition Using Graph Convolutional Networks</div>
+              <div class="authors">Duhme, Michael; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                Pattern Recognition - 43rd DAGM German Conference, DAGM GCPR 2021, Bonn, Germany, September 28 - October 1, 2021, Proceedings
+                
+                 Springer
+                (2021)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                In this paper we present Fusion-GCN, an approach for multimodal action recognition using Graph Convolutional Network (GCNs). Action recognition methods based around Graph Convolutional Network (GCNs) recently yielded state-of-the-art performance for skeleton-based action recognition. With Fusion-GCN, we propose to integrate various sensor data modalities into a graph that is trained using a GCN model for multi-modal action recognition. Additional sensor measurements are incorporated into the graph representation either on a channel dimension (introducing additional node attributes) or spatial dimension (introducing new nodes). Fusion-GCN was evaluated on two publicly available datasets, the UTD-MHAD- and MMACT datasets, and demonstrates flexible fusion of RGB sequences, inertial measurements and skeleton sequences. Our approach gets comparable results on the UTD-MHAD dataset and improves the baseline on the large-scale MMACT dataset by a significant margin of up to 12.37{\%} (F1-Measure) with the fusion of skeleton estimates and accelerometer measurements.
+              </details>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/2109.12946">arxiv</a><a href="https://www.youtube.com/watch?v=CriyQgqCTrs">video</a><a href="https://github.com/mduhme/fusion-gcn">github</a><a href="https://www.youtube.com/watch?v=tErzNL-5ZbM">presentation-video</a>
+                    <a href="https://doi.org/10.1007/978-3-030-92659-5_17">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Haering2021ASO.jpg" alt="Haering2021ASO" loading="lazy">
+            <div class="text">
+              <div class="title">Action Segmentation on Representations of Skeleton Sequences Using Transformer Networks</div>
+              <div class="authors">Häring, Simon; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                2021 IEEE International Conference on Image Processing, ICIP 2021, Anchorage, AK, USA, September 19-22, 2021
+                
+                 IEEE
+                (2021)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                We propose an approach for action segmentation by representing motions as images. A transformer object detection network is used to segment the sequences from the representation images. We examine different encoding approaches, normalization strategies and skeleton joint orders in an extensive experiment study. Our approach is evaluated on skeleton sequences from the PKU-MMD dataset. We successfully apply transformer networks for action segmentation on skeleton sequences. Our proposed approach achieves high class accuracies, while start and end-time estimation of the action segments are subject to further improvement.
+              </details>
+              
+              <div class="pub-links"><a href="https://www.youtube.com/watch?v=yNEuzqzNBSc">video</a>
+                    <a href="https://doi.org/10.1109/ICIP42928.2021.9506687">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Kramer2021CIO.jpg" alt="Kramer2021CIO" loading="lazy">
+            <div class="text">
+              <div class="title">Customer Interaction of a Future Convenience Store with a Mobile Manipulation Service Robot</div>
+              <div class="authors">Kramer, Ivanna; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                2021 IEEE International Conference on Omni-Layer Intelligent Systems, COINS 2021, Barcelona, Spain, August 23-25, 2021
+                
+                 IEEE
+                (2021)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                We present an approach on how to integrate mobile manipulation service robots to support customer interaction of the future convenience store. Customers are identified by their gestures and served e.g., by carrying a shopping bag, guiding the customer to shelves of interest and bringing coffee. An integration into a widely spread telecommunication application is proposed for invoicing payment and further serves as an interface to the customer. Statistics and store layouts can be requested in the application as well as an extendable list of services provided by the robot. Further, a smart shopping bag is proposed which recognizes products stored into it by their barcode. This bag handles the invoicing and allows communication to i.e. the messenger app integration. Furthermore, our proposed system gives hints in how the customers can be profiled by their encoded faces as observed by the robot. We also warn about the possibilities of creating customer profiles without being transparent for the customers. The presented task was ranked 3rd for the Future Convenience Store Challenge at the World Robot Summit 2018.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/COINS51742.2021.9524229">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Roa2021MMH.jpg" alt="Roa2021MMH" loading="lazy">
+            <div class="text">
+              <div class="title">Mobile Manipulation Hackathon: Moving into Real World Applications</div>
+              <div class="authors">Roa, M\'aximo A.; Dogar, Mehmet Remzi; Pag\`es, Jordi; Vivas, Carlos; Morales, Antonio; Correll, Nikolaus; Görner, Michael; Rosell, Jan; Foix, Sergi; Memmesheimer, Raphael; Ferro, Francesco</div>
+              <div class="venue">
+                IEEE Robotics Autom. Mag.
+                
+                (2021)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                The Mobile Manipulation Hackathon was held in late 2018 during the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) to showcase the latest applications of wheeled robotic manipulators. The challenge had an open format, where teams developed an application using simulation tools and integrated it into a robotic platform. This article presents the competition and analyzes the results, with information gathered during the event and from a survey circulated among the finalist teams. We provide an overview of the mobile manipulation field, identify key areas required for further development to facilitate the implementation of mobile manipulators in real applications, and discuss ideas about how to structure future hackathon-style competitions to enhance their impact on the scientific and industrial communities.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/MRA.2021.3061951">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/korbach2021next.jpg" alt="korbach2021next" loading="lazy">
+            <div class="text">
+              <div class="title">Next-Best-View Estimation based on Deep Reinforcement Learning for Active Object Classification</div>
+              <div class="authors">Korbach, Christian; Solbach, Markus D; Memmesheimer, Raphael; Paulus, Dietrich; Tsotsos, John K</div>
+              <div class="venue">
+                arXiv preprint arXiv:2110.06766
+                
+                (2021)
+                
+              </div>
+              
+              <div class="pub-links">
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2020">2020</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2021SSL.jpg" alt="Memmesheimer2021SSL" loading="lazy">
+            <div class="text">
+              <div class="title">SL-DML: Signal Level Deep Metric Learning for Multimodal One-Shot Action Recognition</div>
+              <div class="authors">Memmesheimer, Raphael; Theisen, Nick; Paulus, Dietrich</div>
+              <div class="venue">
+                25th International Conference on Pattern Recognition, ICPR 2020, Virtual Event / Milan, Italy, January 10-15, 2021
+                
+                 IEEE
+                (2020)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                Recognizing an activity with a single reference sample using metric learning approaches is a promising research field. The majority of few-shot methods focus on object recognition or face-identification. We propose a metric learning approach to reduce the action recognition problem to a nearest neighbor search in embedding space. We encode signals into images and extract features using a deep residual CNN. Using triplet loss, we learn a feature embedding. The resulting encoder transforms features into an embedding space in which closer distances encode similar actions while higher distances encode different actions. Our approach is based on a signal level formulation and remains flexible across a variety of modalities. It further outperforms the baseline on the large scale NTU RGB+D 120 dataset for the One-Shot action recognition protocol by 5.6\%. With just 60\% of the training data, our approach still outperforms the baseline approach by 3.7\%. With 40\% of the training data, our approach performs comparably well to the second follow up. Further, we show that our approach generalizes well in experiments on the UTD-MHAD dataset for inertial, skeleton and fused data and the Simitate dataset for motion capturing data. Furthermore, our inter-joint and inter-sensor experiments suggest good capabilities on previously unseen setups.
+              </details>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/2004.11085">arxiv</a><a href="https://www.youtube.com/watch?v=Wdy_YPPiYgc">video</a>
+                    <a href="https://doi.org/10.1109/ICPR48806.2021.9413336">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2020GSD.jpg" alt="Memmesheimer2020GSD" loading="lazy">
+            <div class="text">
+              <div class="title">Gimme Signals: Discriminative signal encoding for multimodal activity recognition</div>
+              <div class="authors">Memmesheimer, Raphael; Theisen, Nick; Paulus, Dietrich</div>
+              <div class="venue">
+                IEEE/RSJ International Conference on Intelligent Robots and Systems, IROS 2020, Las Vegas, NV, USA, October 24, 2020 - January 24, 2021
+                
+                 IEEE
+                (2020)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                We present a simple, yet effective and flexible method for action recognition supporting multiple sensor modalities. Multivariate signal sequences are encoded in an image and are then classified using a recently proposed EfficientNet CNN architecture. Our focus was to find an approach that generalizes well across different sensor modalities without specific adaptions while still achieving good results. We apply our method to 4 action recognition datasets containing skeleton sequences, inertial and motion capturing measurements as well as \wifi fingerprints that range up to 120 action classes. Our method defines the current best CNN-based approach on the NTU RGB+D 120 dataset, lifts the state of the art on the ARIL Wi-Fi dataset by +6.78\%, improves the UTD-MHAD inertial baseline by +14.4\%, the UTD-MHAD skeleton baseline by 1.13\% and achieves 96.11\% on the Simitate motion capturing data (80/20 split). We further demonstrate experiments on both, modality fusion on a signal level and signal reduction to prevent the representation from overloading.
+              </details>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/2003.06156">arxiv</a><a href="https://www.youtube.com/watch?v=oDAtim_nJEg">video</a>
+                    <a href="https://doi.org/10.1109/IROS45743.2020.9341699">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2020RIB.jpg" alt="Memmesheimer2020RIB" loading="lazy">
+            <div class="text">
+              <div class="title">Robotic Imitation by Markerless Visual Observation and Semantic Associations</div>
+              <div class="authors">Memmesheimer, Raphael; Kramer, Ivanna; Seib, Viktor; Theisen, Nick; Paulus, Dietrich</div>
+              <div class="venue">
+                2020 IEEE International Conference on Autonomous Robot Systems and Competitions, ICARSC 2020, Ponta Delgada, Portugal, April 15-17, 2020
+                
+                 IEEE
+                (2020)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                In this paper we present an approach for learning to imitate human behavior on a semantic level by markerless visual observation. We analyze a set of spatial constraints on human pose data extracted using convolutional pose machines and object information extracted from 2D image sequences. A scene analysis, based on an ontology of objects and affordances, is combined with continuous human pose estimation and spatial object relations. Using a set of constraints we associate the observed human actions with a set of executable robot commands. We demonstrate our approach in a kitchen task, where the robot learns to prepare a meal.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/ICARSC49921.2020.9096123">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2019">2019</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2019SAH.jpg" alt="Memmesheimer2019SAH" loading="lazy">
+            <div class="text">
+              <div class="title">Simitate: A Hybrid Imitation Learning Benchmark</div>
+              <div class="authors">Memmesheimer, Raphael; Kramer, Ivanna; Seib, Viktor; Paulus, Dietrich</div>
+              <div class="venue">
+                2019 IEEE/RSJ International Conference on Intelligent Robots and Systems, IROS 2019, Macau, SAR, China, November 3-8, 2019
+                
+                 IEEE
+                (2019)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                We present Simitate, a hybrid benchmarking suite targeting the evaluation of approaches for imitation learning. A dataset containing 1938 sequences where humans perform daily activities in a realistic environment is presented. The dataset is strongly coupled with an integration into a simulator. RGB and depth streams with a resolution of $960 times 540$ at 30Hz and accurate ground truth poses for the demonstrator’s hand, as well as the object in 6 DOF at 120Hz are provided. Along with our dataset we provide the 3D model of the used environment, labeled object images and pre-trained models. A benchmarking suite that aims at fostering comparability and reproducibility supports the development of imitation learning approaches. Further, we propose and integrate evaluation metrics on assessing the quality of effect and trajectory of the imitation performed in simulation. Simitate is available on our project website: https://agas.uni-koblenz.de/simitate/.
+              </details>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/1905.06002">arxiv</a><a href="https://www.youtube.com/watch?v=EHRgX0_G-j4">video</a><a href="https://agas.uni-koblenz.de/simitate/">project-page</a>
+                    <a href="https://doi.org/10.1109/IROS40897.2019.8968029">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2019SAL.jpg" alt="Memmesheimer2019SAL" loading="lazy">
+            <div class="text">
+              <div class="title">Scratchy: A Lightweight Modular Autonomous Robot for Robotic Competitions</div>
+              <div class="authors">Memmesheimer, Raphael; Kuhlmann, Isabelle; Mints, Mark; Schmidt, Patrik; Korbach, Christian; Germann, Ida; Paulus, Dietrich</div>
+              <div class="venue">
+                2019 IEEE International Conference on Autonomous Robot Systems and Competitions, ICARSC 2019, Porto, Portugal, April 24-26, 2019
+                
+                 IEEE
+                (2019)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                We present Scratchy-a modular, lightweight robot built for low budget competition attendances. Its base is mainly built with standard 4040 aluminium profiles and the robot is driven by four mecanum wheels on brushless DC motors. In combination with a laser range finder we use estimated odometry - which is calculated by encoders - for creating maps using a particle filter. A RGB-D camera is utilized for object detection and pose estimation. Additionally, there is the option to use a 6-DOF arm to grip objects from an estimated pose or generally for manipulation tasks. The robot can be assembled in less than one hour and fits into two pieces of hand luggage or one bigger suitcase. Therefore, it provides a huge advantage for student teams that participate in robot competitions like the European Robotics League or RoboCup. Thus, this keeps the funding required for participation, which is often a big hurdle for student teams to overcome, low. The software and additional hardware descriptions are available under: https://github.com/homer-robotics/scratchy.
+              </details>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/1905.05642">arxiv</a><a href="https://github.com/homer-robotics/scratchy">github</a>
+                    <a href="https://doi.org/10.1109/ICARSC.2019.8733655">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2019ALM.jpg" alt="Memmesheimer2019ALM" loading="lazy">
+            <div class="text">
+              <div class="title">Adaptive Learning Methods for Autonomous Mobile Manipulation in RoboCup@Home</div>
+              <div class="authors">Memmesheimer, Raphael; Seib, Viktor; Evers, Tobias; Müller, Daniel; Paulus, Dietrich</div>
+              <div class="venue">
+                RoboCup 2019: Robot World Cup XXIII [Sydney, NSW, Australia, July 8, 2019]
+                
+                 Springer
+                (2019)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                Team homer@UniKoblenz has become an integral part of the RoboCup@Home community. As such we would like to share our experience gained during the competitions with new teams. In this paper we describe our approaches with a special focus on our demonstration of this year’s finals. This includes semantic exploration, adaptive programming by demonstration and touch enforcing manipulation. We believe that these demonstrations have a potential to influence the design of future RoboCup@Home tasks. We also present our current research efforts in benchmarking imitation learning tasks, gesture recognition and a low cost autonomous robot platform. Our software can be found on GitHub at https://github.com/homer- robotics.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-030-35699-6_46">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Kramer2019EOP.jpg" alt="Kramer2019EOP" loading="lazy">
+            <div class="text">
+              <div class="title">Evaluation Of Physical Therapy Through Analysis Of Depth Images</div>
+              <div class="authors">Kramer, Ivanna; Schmidt, Niko; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                28th IEEE International Conference on Robot and Human Interactive Communication, RO-MAN 2019, New Delhi, India, October 14-18, 2019
+                
+                 IEEE
+                (2019)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                The support through robots in orthopaedic rehabilitation is an opportunity to relieve physiotherapists. However, to be able to provide a control in the robot-patient cooperation in the therapy process a certain standard in interpreting the exercise has to be established. In this paper we present an evaluation approach of the health subject performance in a tibiofemoral rehabilitation on the example of squat exercises. The proposed method utilizes only depth images for the performance evaluation and any human- robot interaction system for the performance correction. Thus, this method can be easily applied to a mobile service robot in the robot-aided physical therapy. The patient is observed while performing the exercise and the motion is evaluated and segmented using Motion History Images. Concrete, depth images are used to monitor local points of interest on the performer during the exercise. The proposed approach was evaluated on custom image sequences with a multitude of varying subjects and shows the suitable performance for assisting in the correctness of the exercise execution.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/RO-MAN46459.2019.8956435">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Schneider2019GRI.jpg" alt="Schneider2019GRI" loading="lazy">
+            <div class="text">
+              <div class="title">Gesture Recognition in RGB Videos Using Human Body Keypoints and Dynamic Time Warping</div>
+              <div class="authors">Schneider, Pascal; Memmesheimer, Raphael; Kramer, Ivanna; Paulus, Dietrich</div>
+              <div class="venue">
+                RoboCup 2019: Robot World Cup XXIII [Sydney, NSW, Australia, July 8, 2019]
+                
+                 Springer
+                (2019)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                Gesture recognition opens up new ways for humans to intuitively interact with machines. Especially for service robots, gestures can be a valuable addition to the means of communication to, for example, draw the robot’s attention to someone or something. Extracting a gesture from video data and classifying it is a challenging task and a variety of approaches have been proposed throughout the years. This paper presents a method for gesture recognition in RGB videos using OpenPose to extract the pose of a person and Dynamic Time Warping (DTW) in conjunction with One-Nearest- Neighbor (1NN) for time-series classification. The main features of this approach are the independence of any specific hardware and high flexibility, because new gestures can be added to the classifier by adding only a few examples of it. We utilize the robustness of the Deep Learning-based OpenPose framework while avoiding the data-intensive task of training a neural network ourselves. We demonstrate the classification performance of our method using a public dataset.
+              </details>
+              
+              <div class="pub-links"><a href="https://arxiv.org/abs/1906.12171">arxiv</a><a href="https://github.com/homer-robotics/gesture_recognition_on_rgb_video">github</a>
+                    <a href="https://doi.org/10.1007/978-3-030-35699-6_22">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2018">2018</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2019HWT.jpg" alt="Memmesheimer2019HWT" loading="lazy">
+            <div class="text">
+              <div class="title">homer@UniKoblenz: Winning Team of the RoboCup@Home Open Platform League 2018</div>
+              <div class="authors">Memmesheimer, Raphael; Mykhalchyshyna, Ivanna; Seib, Viktor; Evers, Tobias; Paulus, Dietrich</div>
+              <div class="venue">
+                RoboCup 2018: Robot World Cup XXII [Montreal, QC, Canada, June 18-22, 2018]
+                
+                 Springer
+                (2018)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                We won this year’s RoboCup@Home track in the Open Platform League in Montreal (Canada). The approaches as used for the competition are briefly described in this paper. The robotic hardware of our custom built robot Lisa and the PAL Robotics TIAGo, both running the same methods, are presented. New approaches for object recognition, especially the preprocessed segment augmentation, effort based gripping, gesture recognition and approaches for visual imitation learning based on continuous spatial observations between a demonstrator and the interacting objects are presented. Further, we present the current state of research of our Imitation Learning approaches, where we propose a hybrid benchmark and methods for bootstrapping actions. Furthermore, our research on point cloud based object recognition is presented.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-030-27544-0_42">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2018GRO.jpg" alt="Memmesheimer2018GRO" loading="lazy">
+            <div class="text">
+              <div class="title">Gesture Recognition On Human Pose Features Of Single Images</div>
+              <div class="authors">Memmesheimer, Raphael; Mykhalchyshyna, Ivanna; Paulus, Dietrich</div>
+              <div class="venue">
+                9th IEEE International Conference on Intelligent Systems, IS 2018, Funchal, Madeira, Portugal, September 25-27, 2018
+                
+                 IEEE
+                (2018)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                Enabling robots to read intentions of humans i.e. by detecting a waving person in a restaurant or by pointing to something in a supermarket gives a huge set of possibilities for human robot interactions. Gesture recognition is a challenging problem because of the complexity and the wide variety of human gestures. In this paper, we propose a method for multi-person gesture classification for five gestures and one neutral body posture based on human pose features extracted on 2D images. Comparison between supervised machine learning methods for gesture classification are given. The results showed, that the proposed approach achieves good results on our own validation dataset and generalizes well on a public dataset.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/IS.2018.8710515">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Matamoros2018RSA.jpg" alt="Matamoros2018RSA" loading="lazy">
+            <div class="text">
+              <div class="title">RoboCup@Home: Summarizing achievements in over eleven years of competition</div>
+              <div class="authors">Matamoros, Mauricio; Seib, Viktor; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                2018 IEEE International Conference on Autonomous Robot Systems and Competitions, ICARSC 2018, Torres Vedras, Portugal, April 25-27, 2018
+                
+                 IEEE
+                (2018)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                Scientific competitions are important in robotics because they foster knowledge exchange and allow teams to test their research in unstandardized scenarios and compare result. In the field of service robotics its role becomes crucial. Competitions like RoboCup@Home bring robots to people, a fundamental step to integrate them into society. In this paper we summarize and discuss the differences between the achievements claimed by teams in their team description papers, and the results observed during the competition1 from a qualitative perspective. We conclude with a set of important challenges to be conquered first in order to take robots to people's homes. We believe that competitions are also an excellent opportunity to collect data of direct and unbiased interactions for further research.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/ICARSC.2018.8374181">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2017">2017</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Memmesheimer2018HWT.jpg" alt="Memmesheimer2018HWT" loading="lazy">
+            <div class="text">
+              <div class="title">homer@UniKoblenz: Winning Team of the RoboCup@Home Open Platform League 2017</div>
+              <div class="authors">Memmesheimer, Raphael; Seib, Viktor; Paulus, Dietrich</div>
+              <div class="venue">
+                RoboCup 2017: Robot World Cup XXI [Nagoya, Japan, July 27-31, 2017]
+                
+                 Springer
+                (2017)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                In this paper we present the approaches that we used for this year's RoboCup@Home participation in the Open Platform League. A special focus was put on team collaboration by handing over objects between two robots of different teams that were not connected by network. The robots communicated using natural language (speech synthesis, speech recognition), a typical human-robot ``interface'' that was adapted to robot-robot interaction. Furthermore, we integrated new approaches for online tracking and learning of an operator, have shown a novel approach for teaching a robot new commands by describing them using natural language and a set of previously known commands. Parameters of these commands are still interchangeable. Finally, we integrated deep neural networks for person detection and recognition, human pose estimation, gender classification and object recognition.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-030-00308-1_42">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Wojke2017JOD.jpg" alt="Wojke2017JOD" loading="lazy">
+            <div class="text">
+              <div class="title">Joint operator detection and tracking for person following from mobile platforms</div>
+              <div class="authors">Wojke, Nicolai; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                20th International Conference on Information Fusion, FUSION 2017, Xi'an, China, July 10-13, 2017
+                
+                 IEEE
+                (2017)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                In this paper, we propose an integrated system to detect and track a single operator that can switch off and on when it leaves and (re-)enters the scene. Our method is based on a set-valued Bayes-optimal state estimator that integrates RGB-D detections and image-based classification to improve tracking results in severe clutter and under long-term occlusion. The classifier is trained in two stages: First, we train a deep convolutional neural network to obtain a feature representation for person re-identification. Then, we bootstrap a classifier that discriminates the operator from remaining people on the output of the state-estimator. We evaluate the approach on a publicly available multi-target tracking dataset as well as custom datasets that are specific to our problem formulation. Experimental results suggest reliable tracking accuracy in crowded scenes and robust re-detection after long-term occlusion.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.23919/ICIF.2017.8009746">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Vanzo2017BSU.jpg" alt="Vanzo2017BSU" loading="lazy">
+            <div class="text">
+              <div class="title">Benchmarking Speech Understanding in Service Robotics</div>
+              <div class="authors">Vanzo, Andrea; Iocchi, Luca; Nardi, Daniele; Memmesheimer, Raphael; Paulus, Dietrich; Ivanovska, Iryna; Kraetzschmar, Gerhard K.</div>
+              <div class="venue">
+                Proceedings of the 4th Italian Workshop on Artificial Intelligence and Robotics A workshop of the XVI International Conference of the Italian Association for Artificial Intelligence (AI*IA 2017), Bari, Italy, November 14-15, 2017
+                
+                 CEUR-WS.org
+                (2017)
+                
+                  
+                
+              </div>
+              
+              <div class="pub-links">
+                    <a href="https://ceur-ws.org/Vol-2054/paper6.pdf">url</a>
+                  
+                  
+                    
+                  
+                    
+                      <a href="http://ceur-ws.org/Vol-2054/paper6.pdf">pdf</a>
+                    
+                  
+                
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2016">2016</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Seib2016ARS.jpg" alt="Seib2016ARS" loading="lazy">
+            <div class="text">
+              <div class="title">A ROS-based System for an Autonomous Service Robot</div>
+              <div class="authors">Seib, Viktor; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                Robot Operating System (ROS): The Complete Reference (Volume 1)
+                
+                 Springer
+                (2016)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                The Active Vision Group (AGAS) has gained plenty of experience in robotics over the past years. This contribution focuses on the area of service robotics. We present several important components that are crucial for a service robot system: mapping and navigation, object recognition, speech synthesis and speech recognition. A detailed tutorial on each of these packages is given in the presented chapter. All of the presented components are published on our ROS package repository: http:// wiki.ros.org/agas-ros-pkg.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-319-26054-9_9">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul><h3 class="pub-year" id="pub-2015">2015</h3>
+        <ul class="pub-list"><li>
+            <img src="data/images/paper_previews/small/Seib2015THU.jpg" alt="Seib2015THU" loading="lazy">
+            <div class="text">
+              <div class="title">Team Homer@UniKoblenz - Approaches and Contributions to the RoboCup@Home Competition</div>
+              <div class="authors">Seib, Viktor; Manthe, Stephan; Memmesheimer, Raphael; Polster, Florian; Paulus, Dietrich</div>
+              <div class="venue">
+                RoboCup 2015: Robot World Cup XIX [papers from the 19th Annual RoboCup International Symposium, Hefei, China, July 23, 2015]
+                
+                 Springer
+                (2015)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                In this paper we present the approaches and contributions of team homer@UniKoblenz that were developed for and applied during the RoboCup@Home competitions. In particular, we highlight the different abstraction layers of our software architecture that allows for rapid application development based on the ROS actionlib. This architectural design enables us to focus on the development of new algorithms and approaches and significantly helped us in winning the RoboCup@Home competition in 2015. We further give an outlook on recently published open-source software for service robots that can be downloaded from our ROS package repository on http://wiki.ros.org/agas-ros-pkg .
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1007/978-3-319-29339-4_7">DOI</a>
+                  
+              </div>
+            </div>
+          </li><li>
+            <img src="data/images/paper_previews/small/Seib2015ECF.jpg" alt="Seib2015ECF" loading="lazy">
+            <div class="text">
+              <div class="title">Ensemble classifier for joint object instance and category recognition on RGB-D data</div>
+              <div class="authors">Seib, Viktor; Memmesheimer, Raphael; Paulus, Dietrich</div>
+              <div class="venue">
+                2015 IEEE International Conference on Image Processing, ICIP 2015, Quebec City, QC, Canada, September 27-30, 2015
+                
+                 IEEE
+                (2015)
+                
+              </div>
+              
+              <details>
+                <summary>Abstract</summary>
+                Sensors for RGB-D data have gained high popularity in the computer vision community. We present an efficient ensemble classifier that combines visual and depth data and achieves higher recognition rates than the individual classifiers or a classifier exploiting visual and depth data at the same time. The presented approach was evaluated in practice on a mobile robot during the RoCKIn robotics challenge in 2014.
+              </details>
+              
+              <div class="pub-links">
+                    <a href="https://doi.org/10.1109/ICIP.2015.7350776">DOI</a>
+                  
+              </div>
+            </div>
+          </li></ul></section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Address</h3>
+            University of Bonn<br>
+            Autonomous Intelligent Systems<br>
+            Friedrich-Hirzebruch-Allee 8<br>
+            53115 Bonn<br>
+            Room 0.055<br>
+            <a href="https://www.ais.uni-bonn.de/location.html">Location</a>
+          </div>
+          <div class="contact-card">
+            <h3>Reach me</h3>
+            Phone: +49 228-73-60805<br>
+            Email: <a href="#" class="cryptedmail"
+                data-name="memmesheimer"
+                data-domain="ais.uni-bonn"
+                data-tld="de"
+                onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain + '.' + this.dataset.tld; return false;"></a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © Raphael Memmesheimer · University of Bonn · <a href="#top">Back to top</a>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -250,6 +250,58 @@ a:hover { color: var(--accent-2); }
 .video-list li .text h3,
 .video-list li .text p { margin: 0; }
 
+/* Record list - funding, service, supervision */
+.record-list { list-style: none; margin: 14px 0; padding: 0; }
+.record-list li { display: flex; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.record-list li:last-child { border-bottom: none; }
+.record-list .record-date { flex: 0 0 110px; font-weight: 600; font-size: 0.9em; color: var(--accent); white-space: nowrap; }
+.record-list .record-text { flex: 1 1 auto; }
+.record-list .record-meta { display: block; color: var(--muted); font-size: 0.88em; }
+.reviewer-line { color: var(--muted); font-size: 0.95em; }
+@media (max-width: 600px) {
+  .record-list li { flex-direction: column; gap: 2px; }
+  .record-list .record-date { flex-basis: auto; }
+}
+
+/* Gallery grid - robot performances */
+.gallery-grid { list-style: none; margin: 14px 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.gallery-grid li { margin: 0; }
+.gallery-grid a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.gallery-grid img {
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  transition: transform 140ms ease;
+}
+.gallery-grid a:hover img { transform: scale(1.04); }
+.gallery-grid .play-badge {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.gallery-grid .play-badge svg {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  color: #fff;
+  background: rgba(2, 6, 23, 0.55);
+  border-radius: 50%;
+  transition: background 140ms ease;
+}
+.gallery-grid a:hover .play-badge svg { background: var(--accent); }
+.gallery-caption { margin-top: 6px; font-size: 0.85em; color: var(--muted); line-height: 1.4; }
+
 /* Chips for Links section */
 .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .chips a {
