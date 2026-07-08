@@ -16,30 +16,68 @@
       <span class="hamburger"></span>
     </button>
     <nav class="links">
-      <a href="index.html">Home</a>
-      <a href="index.html#publications">Publications</a>
-      <a href="media.html">Media</a>
-      <a href="teaching.html">Teaching</a>
+      <div class="nav-item">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+          <a href="index.html#news">News</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="research.html">Research</a>
+        <div class="dropdown">
+          <a href="research.html#funding">Funding &amp; Grants</a>
+          <a href="research.html#service">Academic Service</a>
+          <a href="research.html#reviewing">Reviewing</a>
+          <a href="research.html#gallery">Robots in Action</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="publications.html">Publications</a>
+        <div class="dropdown">
+          <a href="index.html#selected-publications">Selected Publications</a>
+          <a href="publications.html">All Publications</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="media.html">Media</a>
+        <div class="dropdown">
+          <a href="media.html#media">Media Coverage</a>
+          <a href="media.html#research-videos">Research Videos</a>
+          <a href="media.html#robotics-videos">Robotics Videos</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="teaching.html">Teaching</a>
+        <div class="dropdown">
+          <a href="teaching.html#teaching">Courses</a>
+          <a href="teaching.html#supervision">Supervised Theses</a>
+        </div>
+      </div>
       <a href="talks.html">Talks</a>
-      <a href="awards.html">Awards</a>
-      <a href="service.html">Service</a>
+      <div class="nav-item">
+        <a href="awards.html">Awards</a>
+        <div class="dropdown">
+          <a href="awards.html#scientific-awards">Scientific Awards</a>
+          <a href="awards.html#competitions">Competition Awards</a>
+          <a href="awards.html#international-wins">International Top-3</a>
+        </div>
+      </div>
       <a href="cv.pdf">CV</a>
-      <!--a href="index.html#news">News</a>
-      <a href="index.html#contact">Contact</a-->
     </nav>
   </div>
   <div class="mobile-menu">
     <nav class="mobile-links">
       <a href="index.html">Home</a>
-      <a href="index.html#publications">Publications</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
       <a href="media.html">Media</a>
       <a href="teaching.html">Teaching</a>
       <a href="talks.html">Talks</a>
       <a href="awards.html">Awards</a>
-      <a href="service.html">Service</a>
       <a href="cv.pdf">CV</a>
-      <!--a href="index.html#news">News</a>
-      <a href="index.html#contact">Contact</a-->
+      <a href="index.html#news">News</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -49,13 +87,9 @@
     <div class="container">
       <!-- Videos -->
       <h2 id="videos">Media</h2>
-      <!-- Navigation to sections -->
-<div class="video-navigation">
-    <h4>Jump to section:</h4>
-    <ul>
-        <li><a href="#media">Media Coverage</a></li><li><a href="#section-1">Research Videos</a></li><li><a href="#section-2">Robotics Videos</a></li></ul>
-</div>
-
+      <!-- Section navigation -->
+<ul class="chips" aria-label="Page sections">
+    <li><a href="#media">Media Coverage</a></li><li><a href="#research-videos">Research Videos</a></li><li><a href="#robotics-videos">Robotics Videos</a></li></ul>
 
 <h3 id="media">Media Coverage</h3>
 <ul><li>
@@ -102,7 +136,7 @@
     11.12.2015 - <a href="http://www.1730live.de/roboter-lisa-hilft-beim-leben/" target="_blank"><b>SAT.1 - 17:30 (Roboter Lisa hilft beim Leben)</b></a> [TV]
   </li></ul>
 
-<!-- Video sections --><div class="video-section" id="section-1">
+<!-- Video sections --><div class="video-section" id="research-videos">
         <h3>Research Videos</h3><p class="section-description">Video abstracts.</p><ul class="video-list"><li>
                 <div class="preview">
                     <a href="https://www.youtube.com/watch?v=9tHCVgKY1ak" target="_blank">
@@ -185,7 +219,7 @@
                     <a href="https://www.youtube.com/watch?v=oDAtim_nJEg" target="_blank"><b>[IROS 2020] Gimme Signals: Discriminative signal encoding for multimodal activity recognition</b></a>
                 </div>
             </li></ul>
-    </div><div class="video-section" id="section-2">
+    </div><div class="video-section" id="robotics-videos">
         <h3>Robotics Videos</h3><p class="section-description">Videos from robotic competitions of teams I led or contributed to.</p><ul class="video-list"><li>
                 <div class="preview">
                     <a href="https://www.youtube.com/watch?v=ZHIBHwrWz70" target="_blank">
