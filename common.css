@@ -57,6 +57,39 @@ body {
 .nav a { color: var(--muted); text-decoration: none; margin-left: 16px; }
 .nav a:hover { color: var(--accent); }
 
+/* Dropdown submenus */
+.links .nav-item {
+  position: relative;
+  display: inline-block;
+}
+.links .nav-item > .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 8px;
+  min-width: 190px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 6px 0;
+  z-index: 60;
+}
+.links .nav-item:hover > .dropdown,
+.links .nav-item:focus-within > .dropdown {
+  display: block;
+}
+.links .nav-item .dropdown a {
+  display: block;
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+.links .nav-item .dropdown a:hover {
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+}
+
 /* Mobile menu toggle button */
 .mobile-menu-toggle {
   background: none;
