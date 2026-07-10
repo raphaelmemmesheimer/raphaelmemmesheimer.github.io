@@ -104,7 +104,13 @@ body {
   max-width: 34em;
   margin: 0 0 20px;
 }
-.hero-photo img { border-radius: 50%; display: block; max-width: 100%; }
+.hero-photo img {
+  border-radius: 50%;
+  display: block;
+  max-width: 100%;
+  border: 4px solid var(--surface);
+  box-shadow: 0 0 0 3px var(--accent), var(--shadow);
+}
 @media (max-width: 760px) {
   .hero-inner { flex-direction: column-reverse; text-align: center; }
   .hero-text .chips { justify-content: center; }
