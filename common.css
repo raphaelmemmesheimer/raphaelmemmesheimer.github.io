@@ -57,6 +57,59 @@ body {
 .nav a { color: var(--muted); text-decoration: none; margin-left: 16px; }
 .nav a:hover { color: var(--accent); }
 
+/* Research topic cards */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.topic-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.topic-card h3 { margin: 0 0 8px; }
+.topic-card p { margin: 0 0 10px; color: var(--muted); }
+.topic-card .topic-links { margin-bottom: 0; }
+
+/* Older news toggle */
+.older-news { margin-top: 12px; }
+.older-news > summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-weight: 600;
+}
+.older-news > summary:hover { color: var(--accent); }
+.older-news[open] > summary { margin-bottom: 8px; }
+
+/* Hero */
+.hero {
+  padding: 48px 0 36px;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(900px 420px at 12% -10%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 65%),
+    radial-gradient(700px 380px at 90% -20%, color-mix(in oklab, var(--accent-2) 12%, transparent), transparent 60%);
+}
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.hero-text h1 { margin: 0 0 8px; }
+.hero .tagline {
+  color: var(--muted);
+  font-size: 1.15em;
+  max-width: 34em;
+  margin: 0 0 20px;
+}
+.hero-photo img { border-radius: 50%; display: block; max-width: 100%; }
+@media (max-width: 760px) {
+  .hero-inner { flex-direction: column-reverse; text-align: center; }
+  .hero-text .chips { justify-content: center; }
+}
+
 /* Dropdown submenus */
 .links .nav-item {
   position: relative;
@@ -409,7 +462,18 @@ a:hover { color: var(--accent-2); }
 .chip-icon { width: 1.1em; height: 1.1em; margin-right: 8px; display: inline-block; }
 
 /* Footer */
-footer { color: var(--muted); text-align: center; padding: 40px 0; }
+footer {
+  color: var(--muted);
+  text-align: center;
+  padding: 32px 0;
+  margin-top: 48px;
+  border-top: 1px solid var(--border);
+  font-size: 0.92em;
+}
+footer p { margin: 4px 0; }
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+.footer-meta { font-size: 0.85em; }
 
 /* Teaching legend */
 .teaching-legend {
