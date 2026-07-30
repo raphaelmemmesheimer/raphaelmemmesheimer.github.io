@@ -447,6 +447,33 @@ a:hover { color: var(--accent-2); }
   white-space: nowrap;
 }
 
+/* Talk type tags */
+.talk-tag {
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 0.75em;
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+.talk-keynote { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
+.talk-invited-talk { background: #dbeafe; border-color: #93c5fd; color: #1e40af; }
+.talk-guest-lecture { background: #ede9fe; border-color: #c4b5fd; color: #5b21b6; }
+.talk-workshop-talk { background: #dcfce7; border-color: #86efac; color: #166534; }
+.talk-panel { background: #cffafe; border-color: #67e8f9; color: #155e75; }
+.talk-outreach { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
+.talk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0;
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
 /* Dataset status remark - e.g. under preparation */
 .dataset-remark {
   display: inline-block;
