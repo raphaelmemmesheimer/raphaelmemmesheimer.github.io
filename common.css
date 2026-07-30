@@ -60,24 +60,41 @@ body {
 /* Research topic cards */
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 .topic-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 18px 20px;
+  overflow: hidden;
 }
-.topic-card h3 { margin: 0 0 8px; }
-.topic-card p { margin: 0 0 10px; color: var(--muted); }
-.topic-card .topic-links { margin-bottom: 0; }
+.topic-card img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border);
+}
+.topic-card img.fit-contain {
+  object-fit: contain;
+  background: #fff;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.topic-body { padding: 18px 20px; }
+.topic-body h3 { margin: 0 0 8px; }
+.topic-body p { margin: 0 0 10px; color: var(--muted); }
+.topic-body .topic-links { margin-bottom: 0; }
 
 /* Dataset cards */
 .dataset-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+}
+@media (max-width: 640px) {
+  .topic-grid, .dataset-grid { grid-template-columns: 1fr; }
 }
 .dataset-card {
   background: var(--surface);
@@ -428,6 +445,13 @@ a:hover { color: var(--accent-2); }
   font-size: 0.82em;
   font-weight: 600;
   white-space: nowrap;
+}
+
+/* Author list note - e.g. shared first co-authorship */
+.authors-note {
+  color: var(--muted);
+  font-size: 0.85em;
+  font-style: italic;
 }
 
 /* Record list - funding, service, supervision */
