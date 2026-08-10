@@ -474,6 +474,12 @@ a:hover { color: var(--accent-2); }
   color: var(--muted);
 }
 
+.pub-type-journal { background: #dbeafe; border-color: #93c5fd; color: #1e40af; }
+.pub-type-conference { background: #dcfce7; border-color: #86efac; color: #166534; }
+.pub-type-techreport { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
+.pub-type-preprint { background: #cffafe; border-color: #67e8f9; color: #155e75; }
+.pub-type-bookchapter { background: #ede9fe; border-color: #c4b5fd; color: #5b21b6; }
+
 /* Dataset status remark - e.g. under preparation */
 .dataset-remark {
   display: inline-block;
