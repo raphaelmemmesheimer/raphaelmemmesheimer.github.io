@@ -1,0 +1,1602 @@
+[
+ {
+  "id": "M009171",
+  "prompt": "person is adjusting their sitting position",
+  "tokens": "person/NOUN is/AUX adjust/VERB their/DET sit/VERB position/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p000_M009171"
+ },
+ {
+  "id": "M005308",
+  "prompt": "person is waving with left hand",
+  "tokens": "person/NOUN is/AUX wave/VERB with/ADP left/ADJ hand/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p001_M005308"
+ },
+ {
+  "id": "002954",
+  "prompt": "the person is  is focused on jogging around",
+  "tokens": "the/DET person/NOUN is/AUX is/AUX focus/VERB on/ADP jog/VERB around/ADP",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p002_002954"
+ },
+ {
+  "id": "M013350",
+  "prompt": "this person puts his left hand to his head",
+  "tokens": "this/DET person/NOUN put/VERB his/DET left/ADJ hand/NOUN to/ADP his/DET head/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p003_M013350"
+ },
+ {
+  "id": "002868",
+  "prompt": "a person does a drumming movement with both hands",
+  "tokens": "a/DET person/NOUN does/AUX a/DET drum/VERB movement/NOUN with/ADP both/DET hand/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p004_002868"
+ },
+ {
+  "id": "M009579",
+  "prompt": "a person walks forward normally",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV normally/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p005_M009579"
+ },
+ {
+  "id": "M002483",
+  "prompt": "person walks slowly on the spot",
+  "tokens": "person/NOUN walk/VERB slowly/ADV on/ADP the/DET spot/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p006_M002483"
+ },
+ {
+  "id": "007085",
+  "prompt": "a man walks forward, turns right and walks in that direction",
+  "tokens": "a/DET man/NOUN walk/VERB forward/ADV turn/VERB right/ADJ and/CCONJ walk/VERB in/ADP that/DET direction/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p007_007085"
+ },
+ {
+  "id": "M006199",
+  "prompt": "a person picks something up on the right and sets it down on the left",
+  "tokens": "a/DET person/NOUN pick/VERB something/PRON up/ADP on/ADP the/DET right/NOUN and/CCONJ set/VERB it/PRON down/ADP on/ADP the/DET left/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p008_M006199"
+ },
+ {
+  "id": "007301",
+  "prompt": "moving hands and jumping",
+  "tokens": "move/VERB hand/NOUN and/CCONJ jump/VERB",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p009_007301"
+ },
+ {
+  "id": "M005676",
+  "prompt": "stretching while standing still",
+  "tokens": "stretch/VERB while/SCONJ stand/VERB still/ADV",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p010_M005676"
+ },
+ {
+  "id": "M003779",
+  "prompt": "a man is alternating hopping on one foot",
+  "tokens": "a/DET man/NOUN is/AUX alternate/VERB hopping/NOUN on/ADP one/NUM foot/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p011_M003779"
+ },
+ {
+  "id": "M013289",
+  "prompt": "a man walks in a counter counterclockwise circle",
+  "tokens": "a/DET man/NOUN walk/VERB in/ADP a/DET counter/ADJ counterclockwise/PROPN circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p012_M013289"
+ },
+ {
+  "id": "013846",
+  "prompt": "a person steps forward and puts their hand up",
+  "tokens": "a/DET person/NOUN step/VERB forward/ADV and/CCONJ put/VERB their/DET hand/NOUN up/ADP",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p013_013846"
+ },
+ {
+  "id": "M004652",
+  "prompt": "a person walks straight forward",
+  "tokens": "a/DET person/NOUN walk/VERB straight/ADV forward/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p014_M004652"
+ },
+ {
+  "id": "M012309",
+  "prompt": "the man spins around then walks forward then back",
+  "tokens": "the/DET man/NOUN spin/VERB around/ADP then/ADV walk/VERB forward/ADV then/ADV back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p015_M012309"
+ },
+ {
+  "id": "M008943",
+  "prompt": "moving hands around near face",
+  "tokens": "move/VERB hand/NOUN around/ADV near/SCONJ face/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p016_M008943"
+ },
+ {
+  "id": "005274",
+  "prompt": "the person checks their right wrist as if checking the time",
+  "tokens": "the/DET person/NOUN check/VERB their/DET right/ADJ wrist/NOUN as/SCONJ if/SCONJ check/VERB the/DET time/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p017_005274"
+ },
+ {
+  "id": "003831",
+  "prompt": "someone imitating a golf swing",
+  "tokens": "someone/PRON imitate/VERB a/DET golf/NOUN swing/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p018_003831"
+ },
+ {
+  "id": "010392",
+  "prompt": "a person starts sitting down",
+  "tokens": "a/DET person/NOUN start/VERB sit/VERB down/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p019_010392"
+ },
+ {
+  "id": "002917",
+  "prompt": "a man moves his hand up in the air",
+  "tokens": "a/DET man/NOUN move/VERB his/DET hand/NOUN up/ADP in/ADP the/DET air/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p020_002917"
+ },
+ {
+  "id": "003027",
+  "prompt": "the person makes a right turn",
+  "tokens": "the/DET person/NOUN make/VERB a/DET right/ADJ turn/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p021_003027"
+ },
+ {
+  "id": "M007561",
+  "prompt": "a person walks to his left",
+  "tokens": "a/DET person/NOUN walk/VERB to/ADP his/DET left/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p022_M007561"
+ },
+ {
+  "id": "002931",
+  "prompt": "a person moves heavy objects from one place to another",
+  "tokens": "a/DET person/NOUN move/VERB heavy/ADJ object/NOUN from/ADP one/NUM place/NOUN to/ADP another/DET",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p023_002931"
+ },
+ {
+  "id": "013978",
+  "prompt": "a man walks in a clockwise circle while holding something to his left shoulder",
+  "tokens": "a/DET man/NOUN walk/VERB in/ADP a/DET clockwise/NOUN circle/NOUN while/SCONJ hold/VERB something/PRON to/ADP his/DET left/ADJ shoulder/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p024_013978"
+ },
+ {
+  "id": "006245",
+  "prompt": "person has hands up in front of face",
+  "tokens": "person/NOUN has/AUX hand/NOUN up/ADP in/ADP front/NOUN of/ADP face/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p025_006245"
+ },
+ {
+  "id": "M002661",
+  "prompt": "a person throws something upwards with two hands",
+  "tokens": "a/DET person/NOUN throw/VERB something/PRON upwards/ADJ with/ADP two/NUM hand/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p026_M002661"
+ },
+ {
+  "id": "013278",
+  "prompt": "a person turns around and looks to the left",
+  "tokens": "a/DET person/NOUN turn/VERB around/ADP and/CCONJ look/VERB to/ADP the/DET left/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p027_013278"
+ },
+ {
+  "id": "013911",
+  "prompt": "a person extends their right arm, and brings it back several times",
+  "tokens": "a/DET person/NOUN extend/VERB their/DET right/ADJ arm/NOUN and/CCONJ bring/VERB it/PRON back/ADV several/ADJ time/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p028_013911"
+ },
+ {
+  "id": "002272",
+  "prompt": "someone getting into position to start catching and tossing an object",
+  "tokens": "someone/PRON get/VERB into/ADP position/NOUN to/PART start/VERB catch/VERB and/CCONJ toss/VERB an/DET object/NOUN",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p029_002272"
+ },
+ {
+  "id": "M004698",
+  "prompt": "subject walks forward and stops",
+  "tokens": "subject/ADJ walk/VERB forward/ADV and/CCONJ stop/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p030_M004698"
+ },
+ {
+  "id": "002404",
+  "prompt": "a person walks in a counter clockwise circle",
+  "tokens": "a/DET person/NOUN walk/VERB in/ADP a/DET counter/NOUN clockwise/NOUN circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p031_002404"
+ },
+ {
+  "id": "M014557",
+  "prompt": "a person walked forward in right direction adn jumped",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV in/ADP right/ADJ direction/NOUN adn/PROPN jump/VERB",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p032_M014557"
+ },
+ {
+  "id": "M011126",
+  "prompt": "the person stretches their elbows",
+  "tokens": "the/DET person/NOUN stretch/VERB their/DET elbow/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p033_M011126"
+ },
+ {
+  "id": "M010720",
+  "prompt": "staying still with arms near chest",
+  "tokens": "stay/VERB still/ADV with/ADP arm/NOUN near/SCONJ chest/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p034_M010720"
+ },
+ {
+  "id": "012741",
+  "prompt": "the man walks and turns right",
+  "tokens": "the/DET man/NOUN walk/VERB and/CCONJ turn/VERB right/ADJ",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p035_012741"
+ },
+ {
+  "id": "007581",
+  "prompt": "a man sits down, brings his hands to his face and then stands back up",
+  "tokens": "a/DET man/NOUN sit/VERB down/ADV bring/VERB his/DET hand/NOUN to/ADP his/DET face/NOUN and/CCONJ then/ADV stand/VERB back/ADV up/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p036_007581"
+ },
+ {
+  "id": "M009199",
+  "prompt": "person makes motions like hit bongos",
+  "tokens": "person/NOUN make/VERB motion/NOUN like/INTJ hit/VERB bongo/NOUN",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p037_M009199"
+ },
+ {
+  "id": "005477",
+  "prompt": "walking forward and then bending down",
+  "tokens": "walk/VERB forward/ADV and/CCONJ then/ADV bend/VERB down/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p038_005477"
+ },
+ {
+  "id": "000352",
+  "prompt": "a man walks forward and puts his head into his right hand",
+  "tokens": "a/DET man/NOUN walk/VERB forward/ADV and/CCONJ put/VERB his/DET head/NOUN into/ADP his/DET right/ADJ hand/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p039_000352"
+ },
+ {
+  "id": "005550",
+  "prompt": "the person is pretending to be a chicken",
+  "tokens": "the/DET person/NOUN is/AUX pretend/VERB to/PART be/AUX a/DET chicken/NOUN",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p040_005550"
+ },
+ {
+  "id": "M002651",
+  "prompt": "a person raises his left arm and then waves at someone",
+  "tokens": "a/DET person/NOUN raise/VERB his/DET left/ADJ arm/NOUN and/CCONJ then/ADV wave/VERB at/ADP someone/PRON",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p041_M002651"
+ },
+ {
+  "id": "012905",
+  "prompt": "the person that was doing a windmill spinning around",
+  "tokens": "the/DET person/NOUN that/DET was/AUX do/VERB a/DET windmill/NOUN spin/VERB around/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p042_012905"
+ },
+ {
+  "id": "M001281",
+  "prompt": "a person raises their left hand to their face",
+  "tokens": "a/DET person/NOUN raise/VERB their/DET left/ADJ hand/NOUN to/ADP their/DET face/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p043_M001281"
+ },
+ {
+  "id": "010898",
+  "prompt": "kicking something to the side",
+  "tokens": "kick/VERB something/PRON to/ADP the/DET side/NOUN",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p044_010898"
+ },
+ {
+  "id": "M008653",
+  "prompt": "walking up stairs with arm out",
+  "tokens": "walk/VERB up/ADP stair/NOUN with/ADP arm/NOUN out/ADP",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p045_M008653"
+ },
+ {
+  "id": "M000419",
+  "prompt": "person uses their left arm to wave",
+  "tokens": "person/NOUN use/VERB their/DET left/ADJ arm/NOUN to/PART wave/VERB",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p046_M000419"
+ },
+ {
+  "id": "M007756",
+  "prompt": "a person takes a big jump forwards",
+  "tokens": "a/DET person/NOUN take/VERB a/DET big/ADJ jump/NOUN forward/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p047_M007756"
+ },
+ {
+  "id": "002304",
+  "prompt": "a person walks forward, hand at the side",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV hand/VERB at/ADP the/DET side/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p048_002304"
+ },
+ {
+  "id": "005726",
+  "prompt": "the man is jogging on the spot",
+  "tokens": "the/DET man/NOUN is/AUX jog/VERB on/ADP the/DET spot/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p049_005726"
+ },
+ {
+  "id": "008944",
+  "prompt": "the person is walking and making a left turn",
+  "tokens": "the/DET person/NOUN is/AUX walk/VERB and/CCONJ make/VERB a/DET left/ADJ turn/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p050_008944"
+ },
+ {
+  "id": "013208",
+  "prompt": "ther person walks forward and leans down to pick something up",
+  "tokens": "ther/PROPN person/NOUN walk/VERB forward/ADV and/CCONJ lean/VERB down/ADP to/PART pick/VERB something/PRON up/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p051_013208"
+ },
+ {
+  "id": "002922",
+  "prompt": "a person does a jumping jack",
+  "tokens": "a/DET person/NOUN does/AUX a/DET jumping/ADJ jack/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p052_002922"
+ },
+ {
+  "id": "M008904",
+  "prompt": "a bent person grabs things with both hands and walks forwards",
+  "tokens": "a/DET bent/ADJ person/NOUN grab/VERB thing/NOUN with/ADP both/DET hand/NOUN and/CCONJ walk/VERB forwards/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p053_M008904"
+ },
+ {
+  "id": "M000048",
+  "prompt": "a person gestures with both arms, puts their left hand on their hip, then gestures again",
+  "tokens": "a/DET person/NOUN gesture/VERB with/ADP both/DET arm/NOUN put/VERB their/DET left/ADJ hand/NOUN on/ADP their/DET hip/NOUN then/ADV gesture/VERB again/ADV",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p054_M000048"
+ },
+ {
+  "id": "008057",
+  "prompt": "person is performing a dance",
+  "tokens": "person/NOUN is/AUX perform/VERB a/DET dance/NOUN",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p055_008057"
+ },
+ {
+  "id": "009771",
+  "prompt": "the man jumps twice into the air",
+  "tokens": "the/DET man/NOUN jump/VERB twice/ADV into/ADP the/DET air/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p056_009771"
+ },
+ {
+  "id": "M007134",
+  "prompt": "a person walking around making a circle",
+  "tokens": "a/DET person/NOUN walk/VERB around/ADP make/VERB a/DET circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p057_M007134"
+ },
+ {
+  "id": "M009517",
+  "prompt": "he throws something very high",
+  "tokens": "he/PRON throw/VERB something/PRON very/ADV high/ADJ",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p058_M009517"
+ },
+ {
+  "id": "014395",
+  "prompt": "while sitting a person raises his left hand to his face and back down",
+  "tokens": "while/SCONJ sit/VERB a/DET person/NOUN raise/VERB his/DET left/ADJ hand/NOUN to/ADP his/DET face/NOUN and/CCONJ back/VERB down/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p059_014395"
+ },
+ {
+  "id": "M000825",
+  "prompt": "the person is jumping in place",
+  "tokens": "the/DET person/NOUN is/AUX jump/VERB in/ADP place/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p060_M000825"
+ },
+ {
+  "id": "M011652",
+  "prompt": "taking a small hop and few steps to the right",
+  "tokens": "take/VERB a/DET small/ADJ hop/NOUN and/CCONJ few/ADJ step/NOUN to/ADP the/DET right/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p061_M011652"
+ },
+ {
+  "id": "014444",
+  "prompt": "figure appears to be walking back and forth",
+  "tokens": "figure/NOUN appear/VERB to/PART be/AUX walk/VERB back/ADV and/CCONJ forth/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p062_014444"
+ },
+ {
+  "id": "M006620",
+  "prompt": "a person walks with their right arm on a railing",
+  "tokens": "a/DET person/NOUN walk/VERB with/ADP their/DET right/ADJ arm/NOUN on/ADP a/DET railing/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p063_M006620"
+ },
+ {
+  "id": "M011055",
+  "prompt": "a person jumped on the place",
+  "tokens": "a/DET person/NOUN jump/VERB on/ADP the/DET place/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p064_M011055"
+ },
+ {
+  "id": "005458",
+  "prompt": "a person walks forward, arms unmoving then they run back",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV arm/NOUN unmoving/ADJ then/ADV they/PRON run/VERB back/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p065_005458"
+ },
+ {
+  "id": "012032",
+  "prompt": "a person is running forward",
+  "tokens": "a/DET person/NOUN is/AUX run/VERB forward/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p066_012032"
+ },
+ {
+  "id": "012673",
+  "prompt": "a person slowly walked forward and sat on something",
+  "tokens": "a/DET person/NOUN slowly/ADV walk/VERB forward/ADV and/CCONJ sit/VERB on/ADP something/PRON",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p067_012673"
+ },
+ {
+  "id": "M007779",
+  "prompt": "a person sits down and applauds",
+  "tokens": "a/DET person/NOUN sit/VERB down/ADV and/CCONJ applaud/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p068_M007779"
+ },
+ {
+  "id": "007359",
+  "prompt": "a man lowers his arms, then looks to his left and right, then moves his head in a circle",
+  "tokens": "a/DET man/NOUN lower/VERB his/DET arm/NOUN then/ADV look/VERB to/ADP his/DET left/NOUN and/CCONJ right/INTJ then/ADV move/VERB his/DET head/NOUN in/ADP a/DET circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p069_007359"
+ },
+ {
+  "id": "013512",
+  "prompt": "while squatting, a person makes circular gestures with their right hand",
+  "tokens": "while/SCONJ squat/VERB a/DET person/NOUN make/VERB circular/ADJ gesture/NOUN with/ADP their/DET right/ADJ hand/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p070_013512"
+ },
+ {
+  "id": "M010193",
+  "prompt": "person opens drawer, picks something up, and puts it back in",
+  "tokens": "person/NOUN open/VERB drawer/NOUN pick/VERB something/PRON up/ADP and/CCONJ put/VERB it/PRON back/ADV in/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p071_M010193"
+ },
+ {
+  "id": "M009986",
+  "prompt": "a person walks in a curve to the left",
+  "tokens": "a/DET person/NOUN walk/VERB in/ADP a/DET curve/NOUN to/ADP the/DET left/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p072_M009986"
+ },
+ {
+  "id": "009338",
+  "prompt": "moving hands near face",
+  "tokens": "move/VERB hand/NOUN near/SCONJ face/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p073_009338"
+ },
+ {
+  "id": "M012302",
+  "prompt": "a person sits down and then gets back up",
+  "tokens": "a/DET person/NOUN sit/VERB down/ADV and/CCONJ then/ADV get/VERB back/ADV up/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p074_M012302"
+ },
+ {
+  "id": "003954",
+  "prompt": "gently swings his arms back and forth",
+  "tokens": "gently/ADV swing/VERB his/DET arm/NOUN back/ADV and/CCONJ forth/ADV",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p075_003954"
+ },
+ {
+  "id": "M013695",
+  "prompt": "the man is doing jumping jacks",
+  "tokens": "the/DET man/NOUN is/AUX do/VERB jump/VERB jack/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p076_M013695"
+ },
+ {
+  "id": "M008720",
+  "prompt": "raising arms and then kneeling",
+  "tokens": "raise/VERB arm/NOUN and/CCONJ then/ADV kneel/VERB",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p077_M008720"
+ },
+ {
+  "id": "M001589",
+  "prompt": "a person runs on the spot",
+  "tokens": "a/DET person/NOUN run/VERB on/ADP the/DET spot/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p078_M001589"
+ },
+ {
+  "id": "004545",
+  "prompt": "a person jumping while rasing both hands, and  move apart legs",
+  "tokens": "a/DET person/NOUN jump/VERB while/SCONJ rase/VERB both/DET hand/NOUN and/CCONJ move/VERB apart/ADV leg/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p079_004545"
+ },
+ {
+  "id": "009511",
+  "prompt": "a person slowly walked forward",
+  "tokens": "a/DET person/NOUN slowly/ADV walk/VERB forward/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p080_009511"
+ },
+ {
+  "id": "M001527",
+  "prompt": "walking in a random pattern",
+  "tokens": "walk/VERB in/ADP a/DET random/ADJ pattern/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p081_M001527"
+ },
+ {
+  "id": "006351",
+  "prompt": "a person holding a cell phone to ear",
+  "tokens": "a/DET person/NOUN hold/VERB a/DET cell/NOUN phone/NOUN to/PART ear/VERB",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p082_006351"
+ },
+ {
+  "id": "003592",
+  "prompt": "a man bends down and picks something up witn his right hand",
+  "tokens": "a/DET man/NOUN bend/VERB down/ADP and/CCONJ pick/VERB something/PRON up/ADV witn/VERB his/DET right/ADJ hand/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p083_003592"
+ },
+ {
+  "id": "012160",
+  "prompt": "a person lifts his right and left hand",
+  "tokens": "a/DET person/NOUN lift/VERB his/DET right/NOUN and/CCONJ left/VERB hand/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p084_012160"
+ },
+ {
+  "id": "012993",
+  "prompt": "a person in a seated position uses their elbows and forearms to raise up to a standing position",
+  "tokens": "a/DET person/NOUN in/ADP a/DET seated/ADJ position/NOUN use/VERB their/DET elbow/NOUN and/CCONJ forearm/NOUN to/PART raise/VERB up/ADP to/ADP a/DET standing/ADJ position/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p085_012993"
+ },
+ {
+  "id": "M001211",
+  "prompt": "a person putting their hands to there face",
+  "tokens": "a/DET person/NOUN put/VERB their/DET hand/NOUN to/PART there/PRON face/VERB",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p086_M001211"
+ },
+ {
+  "id": "004945",
+  "prompt": "a person reaching down and picking something up",
+  "tokens": "a/DET person/NOUN reach/VERB down/ADP and/CCONJ pick/VERB something/PRON up/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p087_004945"
+ },
+ {
+  "id": "M011252",
+  "prompt": "the person is walking up the stairs and stood still",
+  "tokens": "the/DET person/NOUN is/AUX walk/VERB up/ADP the/DET stair/NOUN and/CCONJ stand/VERB still/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p088_M011252"
+ },
+ {
+  "id": "M012602",
+  "prompt": "a person is repeatedly raising and lowering their forearms",
+  "tokens": "a/DET person/NOUN is/AUX repeatedly/ADV raise/VERB and/CCONJ lower/VERB their/DET forearm/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p089_M012602"
+ },
+ {
+  "id": "M008381",
+  "prompt": "person turns around, picks something up, put it to face, turns back forward",
+  "tokens": "person/NOUN turn/VERB around/ADV pick/VERB something/PRON up/ADP put/VERB it/PRON to/ADP face/VERB turn/VERB back/ADV forward/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p090_M008381"
+ },
+ {
+  "id": "012981",
+  "prompt": "waving hands in the air above head",
+  "tokens": "wave/VERB hand/NOUN in/ADP the/DET air/NOUN above/ADP head/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p091_012981"
+ },
+ {
+  "id": "M001448",
+  "prompt": "a person walks in a left bend direction",
+  "tokens": "a/DET person/NOUN walk/VERB in/ADP a/DET left/ADJ bend/NOUN direction/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p092_M001448"
+ },
+ {
+  "id": "M003154",
+  "prompt": "a person reaches up with the right then the left",
+  "tokens": "a/DET person/NOUN reach/VERB up/ADP with/ADP the/DET right/NOUN then/ADV the/DET left/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p093_M003154"
+ },
+ {
+  "id": "M006337",
+  "prompt": "a man walks in a curved line",
+  "tokens": "a/DET man/NOUN walk/VERB in/ADP a/DET curved/ADJ line/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p094_M006337"
+ },
+ {
+  "id": "M004146",
+  "prompt": "a person walks and turns right to walk back",
+  "tokens": "a/DET person/NOUN walk/VERB and/CCONJ turn/VERB right/ADJ to/PART walk/VERB back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p095_M004146"
+ },
+ {
+  "id": "010114",
+  "prompt": "walking forward and stomping feet",
+  "tokens": "walk/VERB forward/ADV and/CCONJ stomp/VERB foot/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p096_010114"
+ },
+ {
+  "id": "M012098",
+  "prompt": "the person walked forward and lifted some thing up turned around and walked back",
+  "tokens": "the/DET person/NOUN walk/VERB forward/ADV and/CCONJ lift/VERB some/DET thing/NOUN up/ADP turn/VERB around/ADP and/CCONJ walk/VERB back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p097_M012098"
+ },
+ {
+  "id": "M004444",
+  "prompt": "the person picks something up, tilts it then puts it back down",
+  "tokens": "the/DET person/NOUN pick/VERB something/PRON up/ADP tilt/VERB it/PRON then/ADV put/VERB it/PRON back/ADV down/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p098_M004444"
+ },
+ {
+  "id": "011652",
+  "prompt": "taking a small hop and few steps to the left",
+  "tokens": "take/VERB a/DET small/ADJ hop/NOUN and/CCONJ few/ADJ step/NOUN to/ADP the/DET left/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p099_011652"
+ },
+ {
+  "id": "009626",
+  "prompt": "a person slowly walked forward and returned",
+  "tokens": "a/DET person/NOUN slowly/ADV walk/VERB forward/ADV and/CCONJ return/VERB",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p100_009626"
+ },
+ {
+  "id": "M007630",
+  "prompt": "a person is waving their hand",
+  "tokens": "a/DET person/NOUN is/AUX wave/VERB their/DET hand/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p101_M007630"
+ },
+ {
+  "id": "012200",
+  "prompt": "a figure lifts a drink shaker and shakes it up then pours",
+  "tokens": "a/DET figure/NOUN lift/VERB a/DET drink/NOUN shaker/NOUN and/CCONJ shake/VERB it/PRON up/ADP then/ADV pour/VERB",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p102_012200"
+ },
+ {
+  "id": "M000241",
+  "prompt": "the person jumps on foot",
+  "tokens": "the/DET person/NOUN jump/VERB on/ADP foot/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p103_M000241"
+ },
+ {
+  "id": "M012240",
+  "prompt": "he displaces the tilt next to him",
+  "tokens": "he/PRON displace/VERB the/DET tilt/NOUN next/ADV to/ADP him/PRON",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p104_M012240"
+ },
+ {
+  "id": "M000476",
+  "prompt": "a person walks forward and then turns to the right to walk away",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV and/CCONJ then/ADV turn/VERB to/ADP the/DET right/NOUN to/PART walk/VERB away/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p105_M000476"
+ },
+ {
+  "id": "M000704",
+  "prompt": "walking in a straight line",
+  "tokens": "walk/VERB in/ADP a/DET straight/ADJ line/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p106_M000704"
+ },
+ {
+  "id": "008173",
+  "prompt": "this person waves forward with his right hand",
+  "tokens": "this/DET person/NOUN wave/VERB forward/ADV with/ADP his/DET right/ADJ hand/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p107_008173"
+ },
+ {
+  "id": "M004183",
+  "prompt": "a person doing a casual walk",
+  "tokens": "a/DET person/NOUN do/VERB a/DET casual/ADJ walk/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p108_M004183"
+ },
+ {
+  "id": "002514",
+  "prompt": "a man touches his head with both hands before lowering them",
+  "tokens": "a/DET man/NOUN touch/VERB his/DET head/NOUN with/ADP both/DET hand/NOUN before/ADP lower/VERB them/PRON",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p109_002514"
+ },
+ {
+  "id": "009216",
+  "prompt": "a person slow pacing up a line",
+  "tokens": "a/DET person/NOUN slow/ADJ pace/VERB up/ADP a/DET line/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p110_009216"
+ },
+ {
+  "id": "M007659",
+  "prompt": "a person jumps forward one time",
+  "tokens": "a/DET person/NOUN jump/VERB forward/ADV one/NUM time/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p111_M007659"
+ },
+ {
+  "id": "M004083",
+  "prompt": "a person taking steps to the left and right",
+  "tokens": "a/DET person/NOUN take/VERB step/NOUN to/ADP the/DET left/NOUN and/CCONJ right/INTJ",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p112_M004083"
+ },
+ {
+  "id": "010167",
+  "prompt": "the man lowers his outreached hands to his knees as he squats down",
+  "tokens": "the/DET man/NOUN lower/VERB his/DET outreache/VERB hand/NOUN to/ADP his/DET knee/NOUN as/SCONJ he/PRON squat/VERB down/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p113_010167"
+ },
+ {
+  "id": "M013647",
+  "prompt": "the person is pacing back-and-forth",
+  "tokens": "the/DET person/NOUN is/AUX pace/VERB backandforth/ADJ",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p114_M013647"
+ },
+ {
+  "id": "M008002",
+  "prompt": "the person was doing a cool walk",
+  "tokens": "the/DET person/NOUN was/AUX do/VERB a/DET cool/ADJ walk/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p115_M008002"
+ },
+ {
+  "id": "003439",
+  "prompt": "a person walking forward, that struggled to maintain a balance",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV that/DET struggle/VERB to/PART maintain/VERB a/DET balance/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p116_003439"
+ },
+ {
+  "id": "001152",
+  "prompt": "a person bends down and jumps forward",
+  "tokens": "a/DET person/NOUN bend/VERB down/ADP and/CCONJ jump/VERB forward/ADV",
+  "category": "ballistic",
+  "upright": "low_pelvis",
+  "name": "p117_001152"
+ },
+ {
+  "id": "M010996",
+  "prompt": "a person lifts his left leg around in the air",
+  "tokens": "a/DET person/NOUN lift/VERB his/DET left/ADJ leg/NOUN around/ADV in/ADP the/DET air/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p118_M010996"
+ },
+ {
+  "id": "M013419",
+  "prompt": "a person hops on their right foot",
+  "tokens": "a/DET person/NOUN hop/VERB on/ADP their/DET right/ADJ foot/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p119_M013419"
+ },
+ {
+  "id": "M008944",
+  "prompt": "the person is walking and making a right turn",
+  "tokens": "the/DET person/NOUN is/AUX walk/VERB and/CCONJ make/VERB a/DET right/ADJ turn/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p120_M008944"
+ },
+ {
+  "id": "012302",
+  "prompt": "a person sits down and then gets back up",
+  "tokens": "a/DET person/NOUN sit/VERB down/ADV and/CCONJ then/ADV get/VERB back/ADV up/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p121_012302"
+ },
+ {
+  "id": "012290",
+  "prompt": "a person walks up stairs",
+  "tokens": "a/DET person/NOUN walk/VERB up/ADP stair/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p122_012290"
+ },
+ {
+  "id": "007365",
+  "prompt": "a person walks up stairs",
+  "tokens": "a/DET person/NOUN walk/VERB up/ADP stair/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p123_007365"
+ },
+ {
+  "id": "M000934",
+  "prompt": "the person is walking forward",
+  "tokens": "the/DET person/NOUN is/AUX walk/VERB forward/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p124_M000934"
+ },
+ {
+  "id": "M009399",
+  "prompt": "the person put his right arm  out and then put his left arm out",
+  "tokens": "the/DET person/NOUN put/VERB his/DET right/ADJ arm/NOUN out/ADP and/CCONJ then/ADV put/VERB his/DET left/ADJ arm/NOUN out/ADP",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p125_M009399"
+ },
+ {
+  "id": "007750",
+  "prompt": "the person pick something up and tilted it onto the right",
+  "tokens": "the/DET person/NOUN pick/VERB something/PRON up/ADP and/CCONJ tilt/VERB it/PRON onto/ADP the/DET right/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p126_007750"
+ },
+ {
+  "id": "007352",
+  "prompt": "the person is walking forward",
+  "tokens": "the/DET person/NOUN is/AUX walk/VERB forward/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p127_007352"
+ },
+ {
+  "id": "M011334",
+  "prompt": "walking forward and then stopping",
+  "tokens": "walk/VERB forward/ADV and/CCONJ then/ADV stop/VERB",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p128_M011334"
+ },
+ {
+  "id": "009402",
+  "prompt": "a person walks forward, spins right, and walks back",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV spin/VERB right/ADJ and/CCONJ walk/VERB back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p129_009402"
+ },
+ {
+  "id": "004605",
+  "prompt": "person is walking around back and forth",
+  "tokens": "person/NOUN is/AUX walk/VERB around/ADV back/ADV and/CCONJ forth/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p130_004605"
+ },
+ {
+  "id": "008610",
+  "prompt": "a person walks in a circle, clockwise",
+  "tokens": "a/DET person/NOUN walk/VERB in/ADP a/DET circle/NOUN clockwise/VERB",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p131_008610"
+ },
+ {
+  "id": "M010298",
+  "prompt": "this person side wide to the right while looking around carefuly",
+  "tokens": "this/DET person/NOUN side/NOUN wide/ADJ to/ADP the/DET right/ADJ while/SCONJ look/VERB around/ADP carefuly/ADV",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p132_M010298"
+ },
+ {
+  "id": "005278",
+  "prompt": "the man walks while holding onto the rail",
+  "tokens": "the/DET man/NOUN walk/VERB while/SCONJ hold/VERB onto/ADP the/DET rail/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p133_005278"
+ },
+ {
+  "id": "M000304",
+  "prompt": "a person walks slowly on a treadmill",
+  "tokens": "a/DET person/NOUN walk/VERB slowly/ADV on/ADP a/DET treadmill/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p134_M000304"
+ },
+ {
+  "id": "M004844",
+  "prompt": "a person walks straight forward down steps",
+  "tokens": "a/DET person/NOUN walk/VERB straight/ADV forward/ADV down/ADP step/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p135_M004844"
+ },
+ {
+  "id": "006724",
+  "prompt": "a person walks in a circle to their left",
+  "tokens": "a/DET person/NOUN walk/VERB in/ADP a/DET circle/NOUN to/ADP their/DET left/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p136_006724"
+ },
+ {
+  "id": "M005869",
+  "prompt": "person paces diagonally two times",
+  "tokens": "person/NOUN pace/VERB diagonally/ADV two/NUM time/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p137_M005869"
+ },
+ {
+  "id": "M006693",
+  "prompt": "a person runs forward to throw with the left arm",
+  "tokens": "a/DET person/NOUN run/VERB forward/ADV to/PART throw/VERB with/ADP the/DET left/ADJ arm/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p138_M006693"
+ },
+ {
+  "id": "M002495",
+  "prompt": "a person walks forward then turns and walks back",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV then/ADV turn/VERB and/CCONJ walk/VERB back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p139_M002495"
+ },
+ {
+  "id": "005375",
+  "prompt": "spinning arms in a circular pattern then walking forward",
+  "tokens": "spin/VERB arm/NOUN in/ADP a/DET circular/ADJ pattern/NOUN then/ADV walk/VERB forward/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p140_005375"
+ },
+ {
+  "id": "011785",
+  "prompt": "a person walks forward then turns around and walks back",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV then/ADV turn/VERB around/ADP and/CCONJ walk/VERB back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p141_011785"
+ },
+ {
+  "id": "M003424",
+  "prompt": "man jumps twice in place",
+  "tokens": "man/NOUN jump/VERB twice/ADV in/ADP place/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p142_M003424"
+ },
+ {
+  "id": "007516",
+  "prompt": "standing on one leg and hopping",
+  "tokens": "stand/VERB on/ADP one/NUM leg/NOUN and/CCONJ hopping/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p143_007516"
+ },
+ {
+  "id": "014522",
+  "prompt": "a person side steps back and forth jogging",
+  "tokens": "a/DET person/NOUN side/NOUN step/VERB back/ADV and/CCONJ forth/ADV jog/VERB",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p144_014522"
+ },
+ {
+  "id": "M005833",
+  "prompt": "a person takes a step to his left",
+  "tokens": "a/DET person/NOUN take/VERB a/DET step/NOUN to/ADP his/DET left/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p145_M005833"
+ },
+ {
+  "id": "007941",
+  "prompt": "moving the left hand on stand",
+  "tokens": "move/VERB the/DET left/ADJ hand/NOUN on/ADP stand/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p146_007941"
+ },
+ {
+  "id": "014025",
+  "prompt": "he casually walked up then turned around",
+  "tokens": "he/PRON casually/ADV walk/VERB up/ADP then/ADV turn/VERB around/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p147_014025"
+ },
+ {
+  "id": "M002668",
+  "prompt": "a person sits on a stool,",
+  "tokens": "a/DET person/NOUN sit/VERB on/ADP a/DET stool/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p148_M002668"
+ },
+ {
+  "id": "007708",
+  "prompt": "a person turns with their arms to stretch",
+  "tokens": "a/DET person/NOUN turn/VERB with/ADP their/DET arm/NOUN to/PART stretch/VERB",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p149_007708"
+ },
+ {
+  "id": "012041",
+  "prompt": "a person runs in a straight line",
+  "tokens": "a/DET person/NOUN run/VERB in/ADP a/DET straight/ADJ line/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p150_012041"
+ },
+ {
+  "id": "012306",
+  "prompt": "a person starts jogging slightly forwards creating a loop and stopping",
+  "tokens": "a/DET person/NOUN start/VERB jog/VERB slightly/ADV forwards/ADP create/VERB a/DET loop/NOUN and/CCONJ stopping/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p151_012306"
+ },
+ {
+  "id": "014380",
+  "prompt": "a person walks forward, then turns and jogs back",
+  "tokens": "a/DET person/NOUN walk/VERB forward/ADV then/ADV turn/VERB and/CCONJ jog/VERB back/ADV",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p152_014380"
+ },
+ {
+  "id": "007473",
+  "prompt": "raising hands towards the air",
+  "tokens": "raise/VERB hand/NOUN towards/ADP the/DET air/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p153_007473"
+ },
+ {
+  "id": "012679",
+  "prompt": "a person kneels down firstly on his right, then his left",
+  "tokens": "a/DET person/NOUN kneel/VERB down/ADP firstly/ADV on/ADP his/DET right/NOUN then/ADV his/DET left/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p154_012679"
+ },
+ {
+  "id": "005617",
+  "prompt": "a person bends their back to stretch",
+  "tokens": "a/DET person/NOUN bend/VERB their/DET back/NOUN to/ADP stretch/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p155_005617"
+ },
+ {
+  "id": "006306",
+  "prompt": "the man is moving his arms",
+  "tokens": "the/DET man/NOUN is/AUX move/VERB his/DET arm/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p156_006306"
+ },
+ {
+  "id": "M007199",
+  "prompt": "a person walks backwards slowly",
+  "tokens": "a/DET person/NOUN walk/VERB backwards/ADV slowly/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p157_M007199"
+ },
+ {
+  "id": "M003800",
+  "prompt": "a person does the cat walk",
+  "tokens": "a/DET person/NOUN does/AUX the/DET cat/NOUN walk/VERB",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p158_M003800"
+ },
+ {
+  "id": "M010936",
+  "prompt": "the person is lifting the dumbbells over his head",
+  "tokens": "the/DET person/NOUN is/AUX lift/VERB the/DET dumbbell/NOUN over/ADP his/DET head/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p159_M010936"
+ },
+ {
+  "id": "011793",
+  "prompt": "figure seen walking in place lazily",
+  "tokens": "figure/NOUN see/VERB walk/VERB in/ADP place/NOUN lazily/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p160_011793"
+ },
+ {
+  "id": "006390",
+  "prompt": "a person bends down and touches their toes, then reaches up and stretches back and forth",
+  "tokens": "a/DET person/NOUN bend/VERB down/ADP and/CCONJ touch/VERB their/DET toe/NOUN then/ADV reach/VERB up/ADP and/CCONJ stretch/VERB back/ADV and/CCONJ forth/ADV",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p161_006390"
+ },
+ {
+  "id": "010072",
+  "prompt": "person walks forward and to the left",
+  "tokens": "person/NOUN walk/VERB forward/ADV and/CCONJ to/ADP the/DET left/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p162_010072"
+ },
+ {
+  "id": "008009",
+  "prompt": "person took his right hand to his mouth",
+  "tokens": "person/NOUN take/VERB his/DET right/ADJ hand/NOUN to/ADP his/DET mouth/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p163_008009"
+ },
+ {
+  "id": "003174",
+  "prompt": "a person is walking across a narrow beam",
+  "tokens": "a/DET person/NOUN is/AUX walk/VERB across/ADP a/DET narrow/ADJ beam/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p164_003174"
+ },
+ {
+  "id": "M011397",
+  "prompt": "a man walks counterclockwise in a circle",
+  "tokens": "a/DET man/NOUN walk/VERB counterclockwise/NOUN in/ADP a/DET circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p165_M011397"
+ },
+ {
+  "id": "003942",
+  "prompt": "walking around in a circle",
+  "tokens": "walk/VERB around/ADV in/ADP a/DET circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p166_003942"
+ },
+ {
+  "id": "012397",
+  "prompt": "standing, a person lifts his right hand over his head and stretches",
+  "tokens": "standing/PROPN a/DET person/NOUN lift/VERB his/DET right/ADJ hand/NOUN over/ADP his/DET head/NOUN and/CCONJ stretch/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p167_012397"
+ },
+ {
+  "id": "M011189",
+  "prompt": "a person walking down and taking a right turn",
+  "tokens": "a/DET person/NOUN walk/VERB down/ADP and/CCONJ take/VERB a/DET right/ADJ turn/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p168_M011189"
+ },
+ {
+  "id": "M009566",
+  "prompt": "a man swings a gulf club",
+  "tokens": "a/DET man/NOUN swing/VERB a/DET gulf/PROPN club/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p169_M009566"
+ },
+ {
+  "id": "001176",
+  "prompt": "a person walks around in a circle",
+  "tokens": "a/DET person/NOUN walk/VERB around/ADV in/ADP a/DET circle/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p170_001176"
+ },
+ {
+  "id": "004841",
+  "prompt": "robot is moving his both hands in upward direction",
+  "tokens": "robot/PROPN is/AUX move/VERB his/DET both/DET hand/NOUN in/ADP upward/ADJ direction/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p171_004841"
+ },
+ {
+  "id": "M002662",
+  "prompt": "backwards all four walk and dodge",
+  "tokens": "backwards/ADV all/DET four/NUM walk/NOUN and/CCONJ dodge/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p172_M002662"
+ },
+ {
+  "id": "M014448",
+  "prompt": "a man walks backwards then punches and then kicks",
+  "tokens": "a/DET man/NOUN walk/VERB backwards/ADV then/ADV punch/NOUN and/CCONJ then/ADV kick/VERB",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p173_M014448"
+ },
+ {
+  "id": "M007893",
+  "prompt": "a person bounces on their feet",
+  "tokens": "a/DET person/NOUN bounce/VERB on/ADP their/DET foot/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p174_M007893"
+ },
+ {
+  "id": "M005761",
+  "prompt": "a person side steps to the right",
+  "tokens": "a/DET person/NOUN side/NOUN step/NOUN to/ADP the/DET right/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p175_M005761"
+ },
+ {
+  "id": "M004865",
+  "prompt": "someone is sitting down on a large throne and then getting back up",
+  "tokens": "someone/PRON is/AUX sit/VERB down/ADP on/ADP a/DET large/ADJ throne/NOUN and/CCONJ then/ADV get/VERB back/ADV up/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p176_M004865"
+ },
+ {
+  "id": "001567",
+  "prompt": "a person stretches their elbows behind them",
+  "tokens": "a/DET person/NOUN stretch/VERB their/DET elbow/NOUN behind/ADP them/PRON",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p177_001567"
+ },
+ {
+  "id": "M008934",
+  "prompt": "walking forward and then to the side",
+  "tokens": "walk/VERB forward/ADV and/CCONJ then/ADV to/ADP the/DET side/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p178_M008934"
+ },
+ {
+  "id": "M012376",
+  "prompt": "person throws a punch with left arm",
+  "tokens": "person/NOUN throw/VERB a/DET punch/NOUN with/ADP left/ADJ arm/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p179_M012376"
+ },
+ {
+  "id": "009410",
+  "prompt": "someone walking stands and begins to move shoulders and arms",
+  "tokens": "someone/PRON walk/VERB stand/VERB and/CCONJ begin/VERB to/PART move/VERB shoulder/NOUN and/CCONJ arm/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p180_009410"
+ },
+ {
+  "id": "M012200",
+  "prompt": "a figure lifts a drink shaker and shakes it up then pours",
+  "tokens": "a/DET figure/NOUN lift/VERB a/DET drink/NOUN shaker/NOUN and/CCONJ shake/VERB it/PRON up/ADP then/ADV pour/VERB",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p181_M012200"
+ },
+ {
+  "id": "012602",
+  "prompt": "a person is repeatedly raising and lowering their forearms",
+  "tokens": "a/DET person/NOUN is/AUX repeatedly/ADV raise/VERB and/CCONJ lower/VERB their/DET forearm/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p182_012602"
+ },
+ {
+  "id": "M014436",
+  "prompt": "a man jumps to his left",
+  "tokens": "a/DET man/NOUN jump/VERB to/ADP his/DET left/NOUN",
+  "category": "ballistic",
+  "upright": "applicable",
+  "name": "p183_M014436"
+ },
+ {
+  "id": "M011813",
+  "prompt": "person uses left hand and arm to move to side then front ways then other movements",
+  "tokens": "person/NOUN use/VERB left/ADJ hand/NOUN and/CCONJ arm/NOUN to/PART move/VERB to/PART side/VERB then/ADV front/ADJ way/NOUN then/ADV other/ADJ movement/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p184_M011813"
+ },
+ {
+  "id": "M004412",
+  "prompt": "a person raises both hands in front of them then throws them down in disapproval",
+  "tokens": "a/DET person/NOUN raise/VERB both/DET hand/NOUN in/ADP front/NOUN of/ADP them/PRON then/ADV throw/VERB them/PRON down/ADP in/ADP disapproval/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p185_M004412"
+ },
+ {
+  "id": "002122",
+  "prompt": "a person stretches their back by turning their arms",
+  "tokens": "a/DET person/NOUN stretch/VERB their/DET back/ADV by/ADP turn/VERB their/DET arm/NOUN",
+  "category": "turning",
+  "upright": "applicable",
+  "name": "p186_002122"
+ },
+ {
+  "id": "004991",
+  "prompt": "a person flaps their arms like a chicken",
+  "tokens": "a/DET person/NOUN flap/VERB their/DET arm/NOUN like/SCONJ a/DET chicken/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p187_004991"
+ },
+ {
+  "id": "002772",
+  "prompt": "a man walks forward and then stops",
+  "tokens": "a/DET man/NOUN walk/VERB forward/ADV and/CCONJ then/ADV stop/VERB",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p188_002772"
+ },
+ {
+  "id": "M012414",
+  "prompt": "a person runs slight towards the left",
+  "tokens": "a/DET person/NOUN run/VERB slight/ADJ towards/ADP the/DET left/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p189_M012414"
+ },
+ {
+  "id": "009140",
+  "prompt": "a figure lunges backwards in a flexed pose",
+  "tokens": "a/DET figure/NOUN lunge/VERB backwards/ADV in/ADP a/DET flexed/ADJ pose/NOUN",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p190_009140"
+ },
+ {
+  "id": "M011477",
+  "prompt": "the person was doing a warm up with his elbows",
+  "tokens": "the/DET person/NOUN was/AUX do/VERB a/DET warm/ADJ up/ADP with/ADP his/DET elbow/NOUN",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p191_M011477"
+ },
+ {
+  "id": "M002799",
+  "prompt": "a man stretching his left arm",
+  "tokens": "a/DET man/NOUN stretch/VERB his/DET left/ADJ arm/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p192_M002799"
+ },
+ {
+  "id": "M001523",
+  "prompt": "a person scratching his head",
+  "tokens": "a/DET person/NOUN scratch/VERB his/DET head/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p193_M001523"
+ },
+ {
+  "id": "M006755",
+  "prompt": "a person sidesteps back and forth",
+  "tokens": "a/DET person/NOUN sidestep/VERB back/ADV and/CCONJ forth/ADV",
+  "category": "other",
+  "upright": "applicable",
+  "name": "p194_M006755"
+ },
+ {
+  "id": "M013208",
+  "prompt": "ther person walks forward and leans down to pick something up",
+  "tokens": "ther/PROPN person/NOUN walk/VERB forward/ADV and/CCONJ lean/VERB down/ADP to/PART pick/VERB something/PRON up/ADP",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p195_M013208"
+ },
+ {
+  "id": "014387",
+  "prompt": "the man moves forward and puts his arms down",
+  "tokens": "the/DET man/NOUN move/VERB forward/ADV and/CCONJ put/VERB his/DET arm/NOUN down/ADV",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p196_014387"
+ },
+ {
+  "id": "M007126",
+  "prompt": "person runs in a diagonal line",
+  "tokens": "person/NOUN run/VERB in/ADP a/DET diagonal/ADJ line/NOUN",
+  "category": "locomotion",
+  "upright": "applicable",
+  "name": "p197_M007126"
+ },
+ {
+  "id": "M011534",
+  "prompt": "a person moves their hands back and forth as if using a broom",
+  "tokens": "a/DET person/NOUN move/VERB their/DET hand/NOUN back/ADV and/CCONJ forth/ADV as/SCONJ if/SCONJ use/VERB a/DET broom/NOUN",
+  "category": "upper_body",
+  "upright": "applicable",
+  "name": "p198_M011534"
+ },
+ {
+  "id": "M005519",
+  "prompt": "the guy lunges forward just a bit and the video ends",
+  "tokens": "the/DET guy/NOUN lunge/VERB forward/ADV just/ADV a/DET bit/NOUN and/CCONJ the/DET video/NOUN end/VERB",
+  "category": "squat_bend",
+  "upright": "low_pelvis",
+  "name": "p199_M005519"
+ }
+]

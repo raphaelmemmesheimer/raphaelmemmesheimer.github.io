@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample, Simulate, Select</title>
+<meta name="description" content="Physics-in-the-loop text-to-motion for humanoids without training: sample N motions from a frozen generator, simulate all of them with the deployment policy, keep the one it executed best.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* palette unchanged; theme: IBM Plex body, Bricolage Grotesque display, hairline structure, square corners */
+  :root{
+    --paper:#ffffff; --paper-2:#f4f7f6; --ink:#1f2226; --ink-soft:#33403f; --muted:#6b7a78; --line:#e1e7e6;
+    --accent:#7846be; --accent-dark:#5f37a0; --accent-soft:#e9e0f6; --sample:#cc3ccc; --simulate:#7846be; --select:#464a50;
+    --gen:#cc3ccc; --gen-soft:#f6ddf6;
+    --pass:#2f7d4f; --pass-soft:#dff0e5; --caution:#b5761a; --caution-soft:#f7ead2; --reject:#b73a2f; --reject-soft:#f6dcd9;
+    --display:'Bricolage Grotesque','IBM Plex Sans',system-ui,sans-serif;
+    --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --maxw:1120px; --r:6px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--paper)}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--accent-dark);text-underline-offset:3px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  @media (max-width:600px){.wrap{padding:0 18px}}
+
+  /* hero: logo above the headline, centred */
+  header.hero{padding-block:56px 40px;text-align:center}
+  .hero .logo{display:block;width:min(260px,55vw);height:auto;margin:0 auto 22px}
+  @media (max-width:800px){header.hero{padding-block:36px 28px}.hero .logo{width:min(190px,50vw);margin-bottom:16px}}
+  h1.title{font-family:var(--display);font-weight:600;font-size:clamp(1.2rem,2.1vw,1.6rem);line-height:1.25;letter-spacing:-.005em;color:var(--ink-soft);text-wrap:balance;max-width:36ch;margin:0 auto 18px}
+  h1.title .lead{display:block;font-weight:700;font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.04;letter-spacing:-.03em;margin-bottom:12px;text-wrap:balance}
+  .lead .c-sample{color:var(--sample)}.lead .c-simulate{color:var(--simulate)}.lead .c-select{color:var(--select)}
+  .subtitle{font-size:clamp(1rem,1.5vw,1.14rem);color:var(--ink-soft);max-width:58ch;margin:0 auto 24px;text-wrap:balance}
+  .authors{font-weight:600;font-size:1.02rem}
+  .authors a{color:inherit;text-decoration:none}
+  .authors a:hover{color:var(--accent);text-decoration:underline}
+  .affil{color:var(--ink-soft);margin-top:2px;font-size:.95rem}
+  .venue{font-family:var(--mono);color:var(--muted);margin-top:10px;font-size:.76rem;letter-spacing:.05em;text-transform:uppercase}
+  .links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:26px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font:500 .92rem/1 var(--sans);text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:var(--r);padding:10px 16px;transition:background .15s,color .15s,border-color .15s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .links .btn:first-child{background:var(--accent);border-color:var(--accent);color:#fff}
+  .links .btn:first-child:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+  .btn:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+  .btn[aria-disabled="true"]{opacity:.45;cursor:default;border-style:dashed}
+  .btn[aria-disabled="true"]:hover{background:var(--paper);color:var(--ink)}
+  .btn svg{width:16px;height:16px;flex:none}
+
+  /* media */
+  .teaser{margin:8px auto 0}
+  .vid{position:relative;width:100%;border-radius:var(--r);overflow:hidden;background:var(--paper-2);border:1px solid var(--line)}
+  .vid video{width:100%;height:auto;display:block}
+  .cap{font-size:.88rem;color:var(--muted);margin-top:10px;line-height:1.5;max-width:92ch}
+  .cap b{color:var(--ink-soft);font-weight:600}
+
+  /* sections: a hairline over each heading instead of a colour rail */
+  section.wrap{padding-block:64px 8px}   /* section.wrap outranks .wrap's padding shorthand */
+  section.wrap>h2{border-top:1px solid var(--ink);padding-top:14px}
+  h2{font-family:var(--display);font-size:clamp(1.55rem,2.8vw,2.1rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px;text-wrap:balance}
+  h3{font-family:var(--display);font-size:1.18rem;font-weight:600;letter-spacing:-.01em;margin:34px 0 10px}
+  p{max-width:70ch;margin-bottom:14px}
+  .prose p{max-width:none}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+  @media (max-width:800px){.two{grid-template-columns:1fr}}
+  figure{margin:18px 0 6px}
+  figure img{display:block;width:100%;height:auto;border-radius:var(--r);border:1px solid var(--line);background:#fff}
+  figcaption{font-size:.88rem;color:var(--muted);margin-top:10px;line-height:1.5}
+  figure.wide{width:min(1500px,96vw);margin-left:calc(50% - min(750px,48vw));margin-right:calc(50% - min(750px,48vw))}
+  figure.wide img{border:none}
+
+  /* numbers: a ruled strip, not tiles */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);margin:8px 0 28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{padding:18px 18px 16px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:none;padding-left:0}
+  @media (max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(odd){border-left:none;padding-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+  .stat .n{font-family:var(--display);font-size:clamp(1.45rem,2.6vw,2rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent-dark)}
+  .stat .l{font-size:.84rem;color:var(--muted);margin-top:6px;line-height:1.45}
+  .findings{display:grid;grid-template-columns:repeat(2,1fr);column-gap:40px;margin:8px 0 18px}
+  @media (max-width:800px){.findings{grid-template-columns:1fr}}
+  .find{padding:16px 0;border-top:1px solid var(--line)}
+  .find b{display:block;font-family:var(--display);font-size:1.08rem;font-weight:600;letter-spacing:-.01em;margin-bottom:4px}
+  .find span{color:var(--ink-soft);font-size:.93rem}
+
+  table{border-collapse:collapse;width:100%;font-size:.95rem;font-variant-numeric:tabular-nums}
+  .tblwrap{overflow-x:auto;margin:10px 0 6px}
+  th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  th{font-weight:600;color:var(--ink-soft);border-bottom:2px solid var(--ink)}
+  tr.hl td{background:var(--accent-soft);font-weight:600}
+  .pill{display:inline-block;border-radius:3px;padding:1px 7px;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+  .pill.pass{background:var(--pass-soft);color:var(--pass)}.pill.caution{background:var(--caution-soft);color:var(--caution)}.pill.reject{background:var(--reject-soft);color:var(--reject)}
+
+  /* demo */
+  .demo{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+  .demo-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+  .demo-bar select,.demo-bar button{font:inherit;font-size:.92rem;padding:9px 12px;border-radius:var(--r);border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .demo-bar select{flex:1;min-width:240px}
+  .demo-bar button{cursor:pointer;font-weight:500}
+  .demo-bar button:hover{border-color:var(--ink)}
+  .demo-bar button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .demo-bar button:focus-visible,.demo-bar select:focus-visible{outline:3px solid var(--accent-soft)}
+  .prompt-line{font-family:var(--mono);font-size:1.02rem;margin:6px 0 4px;color:var(--ink)}
+  .meta{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-bottom:16px}
+  .meta span{margin-right:14px}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 13px;position:relative;font-variant-numeric:tabular-nums}
+  .card.fell{border-color:var(--reject-soft);background:#fffafa}
+  .card.pick{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .card .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .card .id{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+  .card .row{display:flex;justify-content:space-between;font-size:.84rem;padding:2px 0;color:var(--ink-soft)}
+  .card .row b{font-weight:600;color:var(--ink)}
+  .card .tag{position:absolute;top:-9px;right:10px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:.66rem;font-weight:500;padding:2px 7px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+  .card .tag.kin{background:var(--caution);right:auto;left:10px}
+  .card .strip{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:4px;margin:4px 0 8px;background:#fff}
+  .cards.small .card{padding:9px 10px;font-size:.85rem}
+  .bar{height:6px;border-radius:3px;background:var(--reject-soft);overflow:hidden;margin:6px 0 4px}
+  .bar i{display:block;height:100%;background:var(--pass)}
+  .verdict-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;font-size:.9rem}
+  .nstats{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .nstats .box,.verdict-row .box{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:8px 12px;font-size:.88rem}
+  .verdict-row .box b{font-weight:600}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:900px){.grid3{grid-template-columns:1fr 1fr}}
+  @media (max-width:600px){.grid3{grid-template-columns:1fr}}
+  .toggle{display:inline-flex;gap:6px;align-items:center;font-size:.9rem;color:var(--ink-soft);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px;background:#fff}
+  .subhead{font-weight:600;margin:22px 0 10px;color:var(--ink-soft)}
+  .ncontrol{display:flex;gap:14px;align-items:center;margin:10px 0;font-family:var(--mono);font-size:.9rem}
+  .ncontrol input[type=range]{flex:1;max-width:420px;accent-color:var(--accent)}
+  .chartwrap{border:1px solid var(--line);border-radius:var(--r);background:#fff;padding:10px;overflow-x:auto}
+  .chartwrap canvas{width:100%;height:auto;display:block}
+  .hwctl{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 10px;font-size:.9rem}
+  .hwctl select{font:inherit;padding:6px 9px;border-radius:var(--r);border:1px solid var(--line);background:#fff}
+  .hwinfo{display:flex;gap:16px;align-items:flex-start;min-height:64px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;font-size:.9rem;margin-top:10px}
+  .hwinfo .hvid{flex:0 0 300px}.hwinfo .hvid video{width:300px;border-radius:4px;display:block;background:#000}.hwinfo .hvlab{display:block;font-size:.76rem;color:var(--muted);margin-top:4px}
+  .hwinfo .htxt{flex:1;line-height:1.5}
+  @media (max-width:600px){.hwinfo{flex-wrap:wrap}.hwinfo .hvid{flex:1 1 100%}.hwinfo .hvid video{width:100%}}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end}
+  .tiles img{width:100%;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+  .tiles figcaption{font-size:.85rem;color:var(--muted);text-align:center;margin-top:6px}
+  .grp{background:var(--paper-2);font-weight:600}
+  .mono{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+
+  .note{background:var(--accent-soft);padding:12px 16px;border-radius:var(--r);font-size:.92rem;margin:12px 0}
+  .note::before{content:'Note';display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:2px}
+  .todo{background:var(--caution-soft);padding:12px 16px;border-radius:var(--r);font-size:.92rem;margin:12px 0}
+  pre{font-family:var(--mono);font-size:.84rem;line-height:1.55;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;overflow-x:auto}
+  footer{max-width:var(--maxw);margin:48px auto 0;padding:24px 32px 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+  @media (max-width:600px){footer{padding-inline:18px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <img class="logo" src="assets/figs/logo_sss_icon.png" alt="Three G1 robots posed as the letters S S S" width="360">
+  <h1 class="title"><span class="lead"><span class="c-sample">Sample</span>, <span class="c-simulate">Simulate</span>, <span class="c-select">Select</span></span>Physics-in-the-Loop Text-to-Motion for Humanoids Without Training</h1>
+  <p class="subtitle">Draw N motions from a frozen text-to-motion model, simulate all of them with the whole-body policy that runs on the robot, keep the one it executed best.</p>
+  <div class="authors">Raphael Memmesheimer · Sven Behnke</div>
+  <div class="affil">Autonomous Intelligent Systems, University of Bonn, Germany</div>
+  <div class="venue">arXiv preprint, 2026</div>
+  <div class="links">
+    <a class="btn" href="paper.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Paper</a>
+    <a class="btn" href="#" aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Code</a>
+    <a class="btn" href="data/prompts.json"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.7-4 3-9 3s-9-1.3-9-3M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/></svg>Data</a>
+    <a class="btn" href="#video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/></svg>Video</a>
+    <a class="btn" href="#demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg>Demo</a>
+    <a class="btn" href="#hardware"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>Real robot</a>
+  </div>
+</header>
+
+<div class="teaser wrap">
+  <div class="vid"><video id="teaser" data-clip="gen_p107_wave" src="assets/videos_nosmpl/gen_p107_wave.mp4" autoplay muted loop playsinline aria-label="Result video: this person waves forward with his right hand, shown as skeleton, retargeted G1 and G1 under physics"></video></div>
+  <div class="cap"><b>“this person waves forward with his right hand”</b> — generated joints, retargeted G1 reference, and the G1 tracked by the pretrained SONIC policy under physics. This clip was later executed on the real G1.</div>
+</div>
+
+<section class="wrap" id="video">
+  <h2>Video</h2>
+  <div class="vid"><video id="teaservid" src="assets/videos/sss_teaser_720p.mp4" poster="assets/videos/sss_teaser_poster.jpg" controls preload="metadata" playsinline aria-label="Narrated teaser video"></video></div>
+</section>
+
+<section class="wrap" id="abstract">
+  <h2>Abstract</h2>
+  <p>Text-to-motion models generate plausible human motion but do not model a robot's dynamics; whole-body tracking controllers execute robot references reliably but cannot replan an infeasible one. Recent language-to-humanoid systems bridge this gap by training. We measure how much of the gap closes with <em>no</em> training at all, by putting the deployment controller itself in the loop. Sample-simulate-select (S³) draws N motions per prompt from a frozen text-to-motion model (MoMask), retargets each to a Unitree G1 by direction-matching inverse kinematics, rolls all of them out under full rigid-body dynamics with the pretrained SONIC tracking policy, and keeps the candidate the policy executed best. Because the verifier is the deterministic simulator itself, S³ attains the any-of-N ceiling by construction; what we measure is where that ceiling lies and what falls short of it.</p>
+  <p>On 200 stratified HumanML3D test prompts with N = 8, upright execution rises from 83.5% to 89.5% and hardware-gate passes from 33 to 85; on the complete test split (4,184 prompts, 33,472 rollouts) it rises from 80.5% to 89.5%. A kinematic verifier that predicts falls well (AUROC 0.90) recovers only a quarter of this gain: ranking a prompt's own candidates is harder than classifying the population. What selection cannot fix is one class, prompts that lower the pelvis, which a generator trained on retargeted robot data does execute. We further score the semantic fidelity of the executed motion with the standard text–motion evaluator, with a real-mocap control that attributes the loss to the robot projection, ablate the retargeter against GMR (complementary failures: the any-of-8 ceiling rises to 95.0% over both), and execute all 177 gate-selected clips on the real G1: every one completes standing, with hardware tracking error matching simulation (0.114 vs 0.115 rad, r = 0.94).</p>
+</section>
+
+<section class="wrap" id="method">
+  <h2>How it works</h2>
+  <figure class="wide"><img src="assets/figs/fig_pipeline.png" alt="Pipeline: a HumanML3D caption is sampled N times by a frozen MoMask, each candidate retargeted to the G1 by direction-matching IK, each rolled out with the pretrained SONIC policy in MuJoCo, and the best gate level with the lowest tracking error selected for the real robot"><figcaption>Per prompt, <b style="color:var(--sample)">N candidates</b> are sampled from a frozen text-to-motion model, <b>retargeted</b> to the Unitree G1, <b style="color:var(--simulate)">rolled out under physics</b> with the pretrained policy that also runs on the hardware, and the one it executed best is <b style="color:var(--select)">selected</b>, screened and batched into robot sessions. Top: one result in the three representations the chain passes through, four instants overlaid, next to a real-robot take. Nothing is trained.</figcaption></figure>
+  <figure style="margin-top:26px"><img src="assets/figs/fig_sampling.png" alt="The eight rollouts of one prompt as filmstrips, fallen ones outlined in red, the selected sample framed"><figcaption>One prompt, eight samples: three fall, five execute upright, S³ selects the upright sample with the lowest tracking error. The first sample alone would have fallen.</figcaption></figure>
+</section>
+
+<section class="wrap" id="demo">
+  <h2>Interactive: watch S³ choose</h2>
+  <p>All eight samples of a prompt, each with six instants of its physics rollout and the outcome. Pick a prompt or shuffle; the highlighted card is what S³ sends to the robot, the amber tag what a kinematic verifier would have picked.</p>
+  <div class="demo">
+    <div class="demo-bar">
+      <select id="cat" aria-label="Filter by category"><option value="">all categories</option><option>locomotion</option><option>turning</option><option>upper_body</option><option>squat_bend</option><option>ballistic</option><option>other</option></select>
+      <select id="prompt" aria-label="Prompt"></select>
+      <button id="shuffle" class="primary" type="button">Shuffle</button>
+      <button id="fail" type="button">Show a failure</button>
+      <button id="recover" type="button">Show a recovery</button>
+      <label class="toggle"><input type="checkbox" id="crit"> success = <em>tracked</em> instead of <em>upright</em></label>
+    </div>
+    <div class="prompt-line" id="ptext"></div>
+    <div class="meta" id="pmeta"></div>
+    <div class="cards" id="cards"></div>
+    <div class="verdict-row" id="verdict"></div>
+  </div>
+  <h3>How many samples does selection need?</h3>
+  <p>Drag N: the curves are recomputed from the 1,600 rollouts. The physics verifier lies on the any-of-N upper bound at every N; the kinematic verifier does not improve with N.</p>
+  <div class="ncontrol"><label for="nslider">N = <b id="nval">8</b></label><input type="range" id="nslider" min="1" max="8" value="8"></div>
+  <div class="chartwrap"><canvas id="nchart" width="900" height="360" aria-label="Upright rate versus N for physics verifier, kinematic verifier and the upper bound"></canvas></div>
+  <div class="nstats" id="nstats"></div>
+</section>
+
+<section class="wrap" id="results">
+  <h2>What we found</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">83.5 → 89.5 %</div><div class="l">prompts executed upright, 200 HumanML3D test prompts, N = 8 — the any-of-8 ceiling</div></div>
+    <div class="stat"><div class="n">80.5 → 89.5 %</div><div class="l">complete HumanML3D test split, 4,184 prompts, 33,472 rollouts</div></div>
+    <div class="stat"><div class="n">85.0 %</div><div class="l">with a kinematic verifier (AUROC 0.90) instead of the rollout: a quarter of the improvement</div></div>
+    <div class="stat"><div class="n">177 / 177</div><div class="l">gate-selected clips completed standing on the real G1</div></div>
+  </div>
+  <div class="findings">
+    <div class="find"><b>Selection realises the ceiling.</b><span>With the deterministic rollout as verifier, best-of-8 picks an upright sample whenever one exists, by construction, at a few CPU-seconds per candidate. What we measure is where that ceiling lies: 89.5 % at N = 8.</span></div>
+    <div class="find"><b>Predicting falls is not ranking candidates.</b><span>A kinematic risk score separates fallen from upright samples well, but the eight candidates of one prompt share its semantics, so the score barely orders them.</span></div>
+    <div class="find"><b>One class stays out of reach.</b><span>Prompts that lower the pelvis — sit, kneel, deep bend — fall in every sample. A second retargeter recovers some of them, but 10 of 200 stay out of reach under both: motion the frozen generator never produces executably.</span></div>
+    <div class="find"><b>Meaning is lost at the robot, not in selection.</b><span>Scored with the HumanML3D text–motion evaluator, S³'s picks match first samples at every stage; real mocap loses as much through the same retargeting and execution.</span></div>
+    <div class="find"><b>Two retargeters fail on different prompts.</b><span>Direction-matching IK tracks tighter on locomotion, GMR keeps the pelvis higher on squat/bend and ballistic prompts; the any-of-8 ceiling over both reaches 95.0 % (91.0 % from a single sample each).</span></div>
+    <div class="find"><b>Simulation predicts the hardware.</b><span>Tracking error on the robot 0.114 rad vs 0.115 rad in simulation (r = 0.94), and the simulated pelvis tilt predicts which clips wobble on the G1 (AUROC 0.94).</span></div>
+  </div>
+  <div class="two">
+    <figure><img src="assets/figs/fig_category_upright.png" alt="Upright rate per behaviour category for single sample, S³ and the upper bound"><figcaption>Per behaviour category: selection closes the gap everywhere except squat/bend.</figcaption></figure>
+    <figure><img src="assets/figs/fig_failure.png" alt="Squat/bend prompts on which all eight samples fell: retargeted reference on top, SONIC physics below"><figcaption>The unrecoverable class: the reference bends or kneels, the policy follows it to the floor.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" id="videos">
+  <h2>Result videos</h2>
+  <p>Generated skeleton, retargeted G1 reference and the G1 under physics, synchronised. Verdicts are the hardware gate's. <label class="toggle"><input type="checkbox" id="smpl"> also show the fitted SMPL body</label></p>
+  <div class="grid3" id="gallery"></div>
+  <h3>Executed on the real robot</h3>
+  <p>21 clips from the two recording sessions, with a fourth tile: the execution measured on the robot, replayed from its controller logs.</p>
+  <div class="grid3" id="hwgallery"></div>
+</section>
+
+<section class="wrap" id="hardware">
+  <h2>Real-robot deployment</h2>
+  <div class="vid"><video id="montage" src="assets/videos/montage_good_720p.mp4" poster="assets/videos/montage_good_poster.jpg" controls muted loop playsinline preload="metadata" aria-label="Montage of real-robot takes"></video></div>
+  <div class="cap">Real G1: one take full-frame (<b>“someone walking stands and begins to move shoulders and arms”</b>), then nine, then a wider selection of takes, all at once.</div>
+  <p>For safety, every clip was first executed on a gantry that would arrest a fall; clips that completed cleanly there were afterwards re-executed without the gantry, in a second pass over a subset.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">177 / 177</div><div class="l">clips completed with the robot standing — no fall, no abort</div></div>
+    <div class="stat"><div class="n">23</div><div class="l">sessions of eight clips, lowest risk first, two days</div></div>
+    <div class="stat"><div class="n">0.114 vs 0.115 rad</div><div class="l">tracking error on the robot vs in simulation, r = 0.94</div></div>
+    <div class="stat"><div class="n">21</div><div class="l">clips judged unstable — all recovered; the rollout had flagged them (tilt 14° vs 8°)</div></div>
+  </div>
+  <h3>Every trial: simulation vs robot</h3>
+  <p>Each point is one executed clip. Hover a point to see the real-robot footage and its numbers; ringed points have footage.</p>
+  <div class="hwctl">
+    <label>x: <select id="hwx"><option value="e_sim">simulated tracking error</option><option value="tilt_sim">simulated max tilt</option><option value="min_z">simulated min pelvis height</option></select></label>
+    <label>y: <select id="hwy"><option value="e_hw">hardware tracking error</option><option value="tilt_hw">hardware max tilt</option><option value="temp">max motor temperature</option></select></label>
+    <label>colour: <select id="hwc"><option value="outcome">outcome</option><option value="verdict">gate verdict</option><option value="cat">category</option></select></label>
+  </div>
+  <div class="chartwrap"><canvas id="hwchart" width="960" height="470" aria-label="Scatter of simulated versus hardware quantities per executed clip"></canvas></div>
+  <div class="hwinfo" id="hwinfo"><div class="htxt">hover a point</div></div>
+</section>
+
+<section class="wrap" id="citation">
+  <h2>Citation</h2>
+<pre>@article{memmesheimer2026sss,
+  title   = {Sample, Simulate, Select: Physics-in-the-Loop Text-to-Motion
+             for Humanoids Without Training},
+  author  = {Memmesheimer, Raphael and Behnke, Sven},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre>
+</section>
+
+<footer>Sample, Simulate, Select — project page. Simulated videos are MuJoCo renderings of the SONIC rollouts; hardware numbers are from the G1's controller logs.</footer>
+
+<script src="demo_data.js"></script>
+<script src="page_data.js"></script>
+<script src="real_clips.js"></script>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const cat = $('cat'), sel = $('prompt'), crit = $('crit');
+  // ---------- galleries
+  const GALLERY = [
+    ['gen_run','a person runs forward quickly','pass'],['gen_turn_wave','a person turns around and waves both hands','caution'],
+    ['gen_boxing','a person throws a series of boxing punches','caution'],['gen_kick','a person kicks with the right leg','caution'],
+    ['gen_sit_down','a person sits down on a chair','reject'],['gen_pickup','a person bends down to pick something up from the floor','reject'],
+    ['gen_jump','a person jumps up and lands','reject'],['gen_walk_wave','a person walks forward and waves','caution']];
+  const vsrc=f=>`assets/videos${$('smpl').checked?'':'_nosmpl'}/${f}.mp4`;
+  GALLERY.forEach(([f,t,v])=>{const d=document.createElement('div');
+    d.innerHTML=`<div class="vid"><video data-clip="${f}" src="${vsrc(f)}" muted loop playsinline preload="metadata" controls></video></div><div class="cap"><b>“${t}”</b> <span class="pill ${v}">${v.toUpperCase()}</span></div>`;
+    $('gallery').appendChild(d);});
+  $('smpl').addEventListener('change',()=>{document.querySelectorAll('#gallery video, #teaser').forEach(v=>{const p=!v.paused; v.src=vsrc(v.dataset.clip); if(p||v.id==='teaser'){v.play().catch(()=>{});}});});
+  const hwv = HARDWARE.filter(h=>h.video);
+  hwv.forEach(h=>{const d=document.createElement('div'); d.id='hwv-'+h.clip;
+    const oc=h.outcome==='ok'?'pass':(h.outcome==='unstable'?'caution':'reject');
+    d.innerHTML=`<div class="vid"><video src="assets/videos/hw/${h.clip}_cap.mp4" muted loop playsinline preload="metadata" controls></video></div><div class="cap"><b>“${h.prompt}”</b> <span class="pill ${h.verdict.toLowerCase()}">${h.verdict}</span> <span class="pill ${oc}">${h.outcome==='ok'?'completed':h.outcome}</span> <span class="mono">${h.sess}</span></div>`;
+    $('hwgallery').appendChild(d);});
+  // ---------- demo
+  function ok(d,s){ return crit.checked ? !!(TRACKED[d.name]&&TRACKED[d.name][s.r]) : !s.fell; }
+  function fill(){const c=cat.value; sel.innerHTML='';
+    DEMO.filter(d=>!c||d.category===c).forEach(d=>{const o=document.createElement('option');o.value=d.name;o.textContent=d.prompt;sel.appendChild(o);});}
+  function pillHTML(v){return `<span class="pill ${v.toLowerCase()}">${v}</span>`;}
+  function card(s,d,pick,kin){
+    const good=ok(d,s); const el=document.createElement('div'); el.className='card'+(good?'':' fell')+(s.r===pick?' pick':'');
+    el.innerHTML=`${s.r===pick?'<span class="tag">S³ pick</span>':''}${kin!=null&&s.r===kin&&s.r!==pick?'<span class="tag kin">kin. pick</span>':''}
+      ${d.name==='__tex'?'':`<div class="strip" role="img" aria-label="six instants of the SONIC rollout of sample ${s.r}" style="aspect-ratio:1200/178;background:#fff url(assets/strips/gen_${d.name}.webp) no-repeat 0 ${s.r/7*100}%/100% 800%"></div>`}
+      <div class="hd"><span class="id">sample ${s.r}${s.r===0?' (single)':''}</span>${pillHTML(s.verdict)}</div>
+      <div class="bar"><i style="width:${Math.max(0,Math.min(1,(s.min_z-0.1)/0.7))*100}%"></i></div>
+      <div class="row"><span>min pelvis z</span><b>${s.min_z.toFixed(2)} m</b></div>
+      <div class="row"><span>max tilt</span><b>${s.tilt}°</b></div>
+      <div class="row"><span>tracking error e</span><b>${s.e.toFixed(3)}</b></div>
+      ${s.kin!=null?`<div class="row"><span>kinematic risk</span><b>${s.kin.toFixed(2)}</b></div>`:''}
+      ${s.match!==undefined?`<div class="row"><span>matching score</span><b>${s.match==null?'–':s.match.toFixed(2)}</b></div>`:''}
+      <div class="row"><span>outcome</span><b style="color:${good?'var(--pass)':'var(--reject)'}">${good?(crit.checked?'tracked':'upright'):(crit.checked?'not tracked':'fell')}</b></div>`;
+    return el;}
+  function show(name){
+    const d=DEMO.find(x=>x.name===name); if(!d) return; sel.value=name;
+    $('ptext').textContent='“'+d.prompt+'”';
+    const hw=HARDWARE.find(h=>h.clip==='gen_'+d.name+'_r'+d.pick);
+    $('pmeta').innerHTML=`<span>category: <b>${d.category.replace('_','-')}</b></span><span>upright criterion: <b>${d.upright==='low_pelvis'?'low-pelvis (reference-relative)':'applicable'}</b></span><span>${d.name}</span>${hw?`<span>real G1: <b>${hw.outcome==='ok'?'completed':hw.outcome}</b> (${hw.sess}${hw.video?`, <a href="#hwv-${hw.clip}">video</a>`:''})</span>`:''}`;
+    const cards=$('cards'); cards.innerHTML=''; d.samples.forEach(s=>cards.appendChild(card(s,d,d.pick,d.kin_pick)));
+    const up=d.samples.filter(s=>ok(d,s)).length, single=d.samples[0], pick=d.samples.find(s=>s.r===d.pick), kin=d.samples.find(s=>s.r===d.kin_pick);
+    const w=s=>ok(d,s)?(crit.checked?'tracked':'upright'):(crit.checked?'not tracked':'fell');
+    $('verdict').innerHTML=`<div class="box">single sample: <b>${w(single)}</b></div><div class="box">kinematic best-of-8: <b>${w(kin)}</b></div><div class="box">S³: <b>${w(pick)}</b> (${pick.verdict})</div><div class="box">oracle: <b>${up}/${d.samples.length}</b> candidates ${crit.checked?'tracked':'upright'}</div>`;
+  }
+  function pickRandom(list){return list[Math.floor(Math.random()*list.length)];}
+  cat.addEventListener('change',()=>{fill(); show(sel.value);});
+  sel.addEventListener('change',()=>show(sel.value));
+  crit.addEventListener('change',()=>{show(sel.value); drawN();});
+  $('shuffle').addEventListener('click',()=>{const c=cat.value; show(pickRandom(DEMO.filter(d=>!c||d.category===c)).name);});
+  $('fail').addEventListener('click',()=>{show(pickRandom(DEMO.filter(d=>d.samples.every(s=>s.fell))).name);});
+  $('recover').addEventListener('click',()=>{show(pickRandom(DEMO.filter(d=>d.samples[0].fell&&d.samples.some(s=>!s.fell))).name);});
+  // ---------- N chart (live from DEMO)
+  function wilson(k,n){const z=1.96,p=k/n,d=1+z*z/n,c=p+z*z/(2*n),h=z*Math.sqrt(p*(1-p)/n+z*z/(4*n*n));return [(c-h)/d,(c+h)/d];}
+  function curves(){const Ns=[1,2,3,4,5,6,7,8]; const out={phys:[],kin:[],oracle:[]};
+    Ns.forEach(N=>{let ok_={phys:0,kin:0,oracle:0}; DEMO.forEach(d=>{const sub=d.samples.filter(s=>s.r<N);
+      const rank={PASS:0,CAUTION:1,REJECT:2};
+      const p=sub.slice().sort((a,b)=>(rank[a.verdict]-rank[b.verdict])||(a.e-b.e))[0];
+      const k=sub.slice().sort((a,b)=>a.kin-b.kin)[0];
+      ok_.phys+=ok(d,p)?1:0; ok_.kin+=ok(d,k)?1:0; ok_.oracle+=sub.some(s=>ok(d,s))?1:0;});
+      for(const a in out){const [lo,hi]=wilson(ok_[a],DEMO.length); out[a].push([100*ok_[a]/DEMO.length,100*lo,100*hi]);}});
+    return out;}
+  const nc=$('nchart'), nctx=nc.getContext('2d');
+  function drawN(){const cv=curves(); const N=+$('nslider').value; $('nval').textContent=N;
+    const W=nc.width,H=nc.height,L=64,R=20,T=18,B=44; nctx.clearRect(0,0,W,H);
+    const ymin=74,ymax=96; const X=n=>L+(n-1)/7*(W-L-R), Y=v=>T+(ymax-v)/(ymax-ymin)*(H-T-B);
+    nctx.strokeStyle='#e1e7e6'; nctx.lineWidth=1; for(let v=75;v<=95;v+=5){nctx.beginPath();nctx.moveTo(L,Y(v));nctx.lineTo(W-R,Y(v));nctx.stroke(); nctx.fillStyle='#6b7a78';nctx.font='13px "IBM Plex Sans", system-ui';nctx.textAlign='right';nctx.fillText(v+'%',L-8,Y(v)+4);}
+    for(let n=1;n<=8;n++){nctx.fillStyle=n<=N?'#14201f':'#b8c2c0';nctx.textAlign='center';nctx.fillText('N='+n,X(n),H-14);}
+    const sty={oracle:['#464a50',3.5],phys:['#7846be',2],kin:['#cc3ccc',2]};
+    for(const a of ['kin','oracle','phys']){const c=cv[a]; nctx.fillStyle=sty[a][0]+'22'; nctx.beginPath();
+      for(let i=0;i<N;i++) nctx.lineTo(X(i+1),Y(c[i][1])); for(let i=N-1;i>=0;i--) nctx.lineTo(X(i+1),Y(c[i][2])); nctx.closePath(); if(a!=='oracle') nctx.fill();
+      nctx.strokeStyle=sty[a][0]; nctx.lineWidth=sty[a][1]; nctx.setLineDash(a==='oracle'?[8,6]:[]); nctx.beginPath(); for(let i=0;i<N;i++) nctx.lineTo(X(i+1),Y(c[i][0])); nctx.stroke(); nctx.setLineDash([]);
+      for(let i=0;i<N;i++){nctx.beginPath();nctx.arc(X(i+1),Y(c[i][0]),a==='phys'?5:3.5,0,7);nctx.fillStyle=a==='phys'?'#fff':sty[a][0];nctx.fill();nctx.stroke();}}
+    const lab=[['upper bound (any-of-N)','#464a50'],['physics verifier (S³)','#7846be'],['kinematic verifier','#cc3ccc']]; let x=L+10; nctx.font='13px "IBM Plex Sans", system-ui'; nctx.textAlign='left';
+    lab.forEach(([t,c])=>{nctx.fillStyle=c;nctx.fillRect(x,H-B-14,14,4);nctx.fillStyle='#14201f';nctx.fillText(t,x+18,H-B-8);x+=nctx.measureText(t).width+40;});
+    const i=N-1; $('nstats').innerHTML=`<div class="box">N = ${N}: single ${cv.phys[0][0].toFixed(1)}%</div><div class="box">physics best-of-N <b>${cv.phys[i][0].toFixed(1)}%</b> [${cv.phys[i][1].toFixed(1)}, ${cv.phys[i][2].toFixed(1)}]</div><div class="box">kinematic best-of-N ${cv.kin[i][0].toFixed(1)}%</div><div class="box">oracle ${cv.oracle[i][0].toFixed(1)}% — gap ${(cv.oracle[i][0]-cv.phys[i][0]).toFixed(1)} pts</div>`;}
+  $('nslider').addEventListener('input',drawN);
+  // ---------- hardware scatter
+  const hc=$('hwchart'), hctx=hc.getContext('2d'); let pts=[];
+  const AX={e_sim:'simulated tracking error [rad]',tilt_sim:'simulated max pelvis tilt [°]',min_z:'simulated min pelvis height [m]',e_hw:'hardware tracking error [rad]',tilt_hw:'hardware max pelvis tilt [°]',temp:'max motor temperature at clip end [°C]'};
+  const COL={outcome:{ok:'#2f7d4f',unstable:'#b5761a'},verdict:{PASS:'#2f7d4f',CAUTION:'#b5761a'},cat:{locomotion:'#7846be',turning:'#464a50',upper_body:'#cc3ccc',squat_bend:'#b73a2f',ballistic:'#f4a261',other:'#9a9ea4'}};
+  function drawHW(){const xk=$('hwx').value,yk=$('hwy').value,ck=$('hwc').value; const data=HARDWARE.filter(h=>h[xk]!=null&&h[yk]!=null);
+    const W=hc.width,H=hc.height,L=64,R=20,T=16,B=92; hctx.clearRect(0,0,W,H);
+    const xs=data.map(h=>h[xk]),ys=data.map(h=>h[yk]); const xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);
+    const X=v=>L+(v-xmin)/(xmax-xmin||1)*(W-L-R), Y=v=>T+(ymax-v)/(ymax-ymin||1)*(H-T-B);
+    hctx.strokeStyle='#e1e7e6'; for(let i=0;i<=4;i++){const v=ymin+(ymax-ymin)*i/4; hctx.beginPath();hctx.moveTo(L,Y(v));hctx.lineTo(W-R,Y(v));hctx.stroke(); hctx.fillStyle='#6b7a78';hctx.font='12px "IBM Plex Sans", system-ui';hctx.textAlign='right';hctx.fillText(v.toFixed(yk==='temp'?0:2),L-6,Y(v)+4);
+      const u=xmin+(xmax-xmin)*i/4; hctx.textAlign='center'; hctx.fillText(u.toFixed(xk==='min_z'?2:(xk==='tilt_sim'?0:2)),X(u),H-B+16);}
+    hctx.fillStyle='#14201f'; hctx.textAlign='center'; hctx.font='13px "IBM Plex Sans", system-ui'; hctx.fillText(AX[xk],(L+W-R)/2,H-B+44);
+    hctx.save(); hctx.translate(14,(T+H-B)/2); hctx.rotate(-Math.PI/2); hctx.fillText(AX[yk],0,0); hctx.restore();
+    if((xk==='e_sim'&&yk==='e_hw')||(xk==='tilt_sim'&&yk==='tilt_hw')){hctx.setLineDash([6,5]);hctx.strokeStyle='#999';hctx.beginPath();const lo=Math.max(xmin,ymin),hi=Math.min(xmax,ymax);hctx.moveTo(X(lo),Y(lo));hctx.lineTo(X(hi),Y(hi));hctx.stroke();hctx.setLineDash([]);}
+    pts=data.map(h=>({x:X(h[xk]),y:Y(h[yk]),h})); pts.forEach(p=>{const hasReal=(typeof REAL!=='undefined')&&REAL[p.h.clip]; hctx.beginPath();hctx.arc(p.x,p.y,hasReal?6:4.5,0,7);hctx.fillStyle=(COL[ck][p.h[ck]]||'#6b7a78')+'cc';hctx.fill(); if(hasReal){hctx.strokeStyle='#14201f';hctx.lineWidth=1.2;hctx.stroke();}});
+    const LAB={ok:'completed',unstable:'judged unstable',PASS:'PASS',CAUTION:'CAUTION',locomotion:'locomotion',turning:'turning',upper_body:'upper-body',squat_bend:'squat/bend',ballistic:'ballistic',other:'other'};
+    hctx.font='13px "IBM Plex Sans", system-ui'; hctx.textAlign='left';
+    const items=Object.entries(COL[ck]).map(([k,c])=>{const t=LAB[k]||k.replace('_','/'); return {t,c,w:hctx.measureText(t).width+30};});
+    const avail=W-L-R; let rows=[[]], rw=0;
+    items.forEach(it=>{ if(rw+it.w>avail && rows[rows.length-1].length){rows.push([]); rw=0;} rows[rows.length-1].push(it); rw+=it.w; });
+    rows.forEach((row,ri)=>{ let x=L, y=H-12-(rows.length-1-ri)*18;
+      row.forEach(it=>{ hctx.fillStyle=it.c; hctx.beginPath(); hctx.arc(x+6,y-4,5,0,7); hctx.fill();
+        hctx.fillStyle='#14201f'; hctx.fillText(it.t,x+17,y); x+=it.w; }); });
+    hctx.fillStyle='#6b7a78'; hctx.textAlign='right'; hctx.fillText('hover a point for its numbers', W-R, T+12); hctx.textAlign='left';}
+  function near(ev){const r=hc.getBoundingClientRect(); const mx=(ev.clientX-r.left)*hc.width/r.width, my=(ev.clientY-r.top)*hc.height/r.height; let best=null,bd=1e9;
+    pts.forEach(p=>{const d=(p.x-mx)**2+(p.y-my)**2; if(d<bd){bd=d;best=p;}}); return bd<200?best:null;}
+  let lastClip=null;
+  hc.addEventListener('mousemove',ev=>{const p=near(ev); if(!p){return;} const h=p.h; if(h.clip===lastClip) return; lastClip=h.clip;
+    const real=(typeof REAL!=='undefined')&&REAL[h.clip]; const src=real?real.file:(h.video?`assets/videos/hw/${h.clip}_cap.mp4`:null);
+    $('hwinfo').innerHTML=`${src?`<div class="hvid"><video src="${src}" muted loop autoplay playsinline preload="auto"></video><span class="hvlab">${real?'real G1, session '+real.session+', take '+real.take:'simulated rollout (no footage of this session)'}</span></div>`:''}<div class="htxt"><b>“${h.prompt}”</b><br>${h.cat.replace('_','/')} · gate <span class="pill ${h.verdict.toLowerCase()}">${h.verdict}</span> · session ${h.sess} · <b>${h.outcome==='ok'?'completed':h.outcome}</b>${h.notes?' ('+h.notes+')':''}<br>tracking error sim ${h.e_sim!=null?h.e_sim.toFixed(3):'–'} / robot ${h.e_hw!=null?h.e_hw.toFixed(3):'–'} rad · max tilt sim ${h.tilt_sim!=null?h.tilt_sim.toFixed(0):'–'}° / robot ${h.tilt_hw!=null?h.tilt_hw.toFixed(0):'–'}°${h.temp?' · '+h.temp+' °C':''}${h.video?` · <a href="#hwv-${h.clip}">four-tile video</a>`:''}</div>`;});
+  hc.addEventListener('click',ev=>{const p=near(ev); if(p&&p.h.video) location.hash='hwv-'+p.h.clip;});
+  ['hwx','hwy','hwc'].forEach(id=>$(id).addEventListener('change',drawHW));
+  fill(); show(DEMO.find(d=>d.samples[0].fell&&d.samples.some(s=>!s.fell)).name); drawN(); drawHW();
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>{drawN();drawHW();});}   // canvas text in the page font once loaded
+})();
+</script>
+</body>
+</html>
