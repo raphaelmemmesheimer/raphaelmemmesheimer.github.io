@@ -1,0 +1,44 @@
+{
+ "sequences": [
+  {
+   "seq_id": "S10A51T01",
+   "label": "Waving",
+   "action": "Waving"
+  },
+  {
+   "seq_id": "S10A15T01",
+   "label": "Kick",
+   "action": "Kick"
+  },
+  {
+   "seq_id": "S01A09T01",
+   "label": "Falling",
+   "action": "Falling"
+  },
+  {
+   "seq_id": "S10A14T02",
+   "label": "Jumping",
+   "action": "Jumping"
+  },
+  {
+   "seq_id": "S10A50T01",
+   "label": "Walking towards",
+   "action": "Walking_towards"
+  },
+  {
+   "seq_id": "S10A13T01",
+   "label": "High five (2 persons)",
+   "action": "High_five_person"
+  },
+  {
+   "seq_id": "S10A18T01",
+   "label": "Longboarding",
+   "action": "Longboarding"
+  },
+  {
+   "seq_id": "S10A34T01",
+   "label": "Sit down",
+   "action": "Sit_Down"
+  }
+ ]
+}
