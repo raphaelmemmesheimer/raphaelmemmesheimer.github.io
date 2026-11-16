@@ -8,17 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileMenu = document.querySelector('.mobile-menu');
   const hamburger = document.querySelector('.hamburger');
   
-  if (menuToggle && mobileMenu) {
+  if (menuToggle && mobileMenu && hamburger) {
     // Toggle menu on button click
     menuToggle.addEventListener('click', function(e) {
       e.stopPropagation();
       mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
       
       // Close menu when clicking on a link
       const links = mobileMenu.querySelectorAll('a');
       links.forEach(link => {
         link.addEventListener('click', function() {
           mobileMenu.classList.remove('active');
+          hamburger.classList.remove('active');
         });
       });
     });
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
       if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
         mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
       }
     });
     
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
         mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
       }
     });
   }
